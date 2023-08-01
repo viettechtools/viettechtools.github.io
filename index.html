@@ -1609,6 +1609,12 @@
 
     <!-- Main display area: contains image canvas, ... -->
     <div id="display_area">
+      <form id="image_caption_form">
+        <label for="input_image_caption_form">Caption of the image:</label>
+        <input type="text" id="input_image_caption_form">
+        <input type="text" id="input_image_caption_id" style="display:none" value="">
+        <button type="submit">Save Caption</button>
+      </form>
       <div id="image_panel" class="display_area_content display_none">
         <!-- buffer images using <img> element will be added here -->
 
@@ -2134,6 +2140,10 @@ POSSIBILITY OF SUCH DAMAGE.
     var _via_reg_canvas = document.getElementById('region_canvas');
     var _via_reg_ctx; // initialized in _via_init()
     var _via_canvas_width, _via_canvas_height;
+
+    // image caption
+    var _via_input_caption = document.getElementById('input_image_caption_form');
+    var _via_input_caption_id = document.getElementById('input_image_caption_id');
 
     // canvas zoom
     var _via_canvas_zoom_level_index = VIA_CANVAS_DEFAULT_ZOOM_LEVEL_INDEX; // 1.0
@@ -3884,11 +3894,17 @@ POSSIBILITY OF SUCH DAMAGE.
           if (image_index >= 0 && image_index < _via_img_count) {
             // @todo: jump to image grid page view with the given first image index
             show_single_image_view();
+            var img_id = _via_image_id_list[image_index];
+            _via_input_caption.value = _via_img_metadata[img_id].caption
+            _via_input_caption_id.value = img_id
             _via_show_img(image_index);
           }
           break;
         default:
           if (image_index >= 0 && image_index < _via_img_count) {
+            var img_id = _via_image_id_list[image_index];
+            _via_input_caption.value = _via_img_metadata[img_id].caption
+            _via_input_caption_id.value = img_id
             _via_show_img(image_index);
           }
           break;
@@ -12343,6 +12359,23 @@ POSSIBILITY OF SUCH DAMAGE.
       }
       return [xmin, ymin, xmax - xmin, ymax - ymin];
     }
+
+    // Handle save caption image
+    document.addEventListener("DOMContentLoaded", function () {
+      // Get the form element
+      const imageForm = document.getElementById("image_caption_form");
+
+      // Add a submit event listener to the form
+      imageForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+        _via_img_metadata[_via_input_caption_id.value].caption = _via_input_caption.value
+        // console.log(_via_img_metadata[_via_input_caption_id.value])
+        console.log(_via_img_metadata[_via_input_caption_id.value])
+        console.log(_via_input_caption.value)
+        console.log(_via_input_caption_id.value)
+      });
+    });
+
   </script>
   <!-- END: Contents of file: via.js-->
 </body>
