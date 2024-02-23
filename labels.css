@@ -1,0 +1,125 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.icon-and-text-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 30px;
+}
+
+#container {
+  display: flex;
+}
+
+#sidebar {
+  width: 300px;
+  height: 200px;
+  border: 1px solid #ccc;
+  padding: 10px;
+
+  position: relative;
+}
+
+#todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+#todo-list li {
+  padding: 5px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+}
+
+#todo-list li:hover {
+  background-color: #f2f2f2;
+}
+
+#btn-load-image {
+  margin-top: 10px;
+  padding: 5px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+}
+
+#load-json-button {
+  margin-top: 10px;
+  margin: 0 5px;
+  padding: 5px 5px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#save-json-button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+
+#main-content {
+  flex: 1;
+  margin-left: 20px;
+  max-width: 800px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+#images-content {
+  margin: 10px 0px;
+}
+
+.image-viewer {
+  max-width: 100%;
+  max-height: 500px;
+}
+
+#save-button {
+  width: 200px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+#sidebar-right {
+  border: 1px solid #ccc;
+  padding: 10px;
+
+  width: 270px;
+}
+
+.toggle-icon {
+  font-size: 15px;
+  line-height: 15px;
+  margin-right: 10px;
+  border: 1px solid;
+  padding: 0 5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.toggle-icon:hover {
+  background-color: #ccc;
+}

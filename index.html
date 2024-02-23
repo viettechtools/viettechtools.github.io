@@ -9711,6 +9711,7 @@ POSSIBILITY OF SUCH DAMAGE.
       var discarded_file_count = 0;
       for (var i = 0; i < user_selected_images.length; ++i) {
         var filetype = user_selected_images[i].type.substr(0, 5);
+        console.log(user_selected_images[i])
         if (filetype === 'image') {
           // check which filename in project matches the user selected file
           var img_index = _via_image_filename_list.indexOf(user_selected_images[i].name);
