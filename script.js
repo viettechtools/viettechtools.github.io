@@ -70,33 +70,212 @@ const labelList = document.getElementById('label-list');
 
 // Cấu trúc dữ liệu label
 const LABELS = {
-    "pant": [
-        "long",
-        "short",
-        "thin",
-    ],
-    "shirt": [
-        "long",
-        "new",
-        "old",
-    ],
-    "level1": {
-        "level2_1": {
-            "level3_1": [
-                "level4_1",
-                "level4_2",
+    "top": {
+        "neck": [
+            "Collar",
+            "tuttle",
+            "round",
+            "v-shape",
+            "bustier",
+            "hoodie",
+        ],
+        "body": {
+            "zipper/button": [
+                "symmetry", "asymmetry",
             ],
-            "level3_2": [
-                "level4_1",
-                "level4_2",
-                "level4_4",
+            "length": [
+                "chest", "belly", "normal", "long",
+            ],
+            "fit": [
+                "fit", "loose", "puff",
+            ],
+            "style": [
+                "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",
             ]
         },
-        "level2_2": [
-            "level3_1",
-            "level3_2",
-        ]
-    }
+        "sleeve": {
+            "length": [
+                "long", "short", "sleeveless"
+            ],
+            "fit": [
+                "tight", "puff", "loose", "upper loose",
+            ],
+            "style": [
+                "1-sleeve", "layer", "flowery", "pin ending",
+            ]
+        },
+        "accessories": [
+            "bow", "ruffle", "band", "belt", "others",
+        ],
+    },
+    "bottom": {
+        "skirt": {
+            "body": {
+                "length": [
+                    "long", "short", "sleeveless"
+                ],
+                "fit": [
+                    "tight", "puff", "loose", "upper loose",
+                ],
+                "style": [
+                    "1-sleeve", "layer", "flowery", "pin ending",
+                ]
+            },
+            "accessories": [
+                "bow", "ruffle", "band", "belt", "others",
+            ],
+        },
+        "pant": {
+            "leg": {
+                "length": [
+                    "long", "short",
+                ],
+                "fit": [
+                    "tight", "puff", "loose", "upper loose",
+                ],
+                "style": [
+                    "layer", "flowery", "pin ending",
+                ]
+            },
+            "accessories": [
+                "bow", "ruffle", "band", "belt", "others",
+            ],
+        },
+        "panty": ["panty"],
+    },
+    "whole-body": {
+        "dress/long coat": {
+            "neck": [
+                "Collar",
+                "tuttle",
+                "round",
+                "v-shape",
+                "bustier",
+            ],
+            "body": {
+                "zipper/button": [
+                    "symmetry", "asymmetry",
+                ],
+                "length": [
+                    "mini", "middle", "long",
+                ],
+                "fit": [
+                    "fit", "loose", "puff",
+                ],
+                "style": [
+                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",
+                ]
+            },
+            "sleeve": {
+                "length": [
+                    "long", "short", "sleeveless"
+                ],
+                "fit": [
+                    "tight", "puff", "loose", "upper loose",
+                ],
+                "style": [
+                    "1-sleeve", "layer", "flowery", "pin ending",
+                ]
+            },
+            "accessories": [
+                "bow", "ruffle", "band", "belt", "others",
+            ],
+        },
+        "jumpsuit": {
+            "neck": [
+                "Collar",
+                "tuttle",
+                "round",
+                "v-shape",
+                "bustier",
+                "hoodie",
+            ],
+            "body": {
+                "zipper/button": [
+                    "symmetry", "asymmetry",
+                ],
+                "length": [
+                    "chest",
+                ],
+                "fit": [
+                    "fit", "loose", "puff",
+                ],
+                "style": [
+                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "flowery", "pin", "pin-ending",
+                ]
+            },
+            "sleeve": {
+                "length": [
+                    "long", "short", "sleeveless"
+                ],
+                "fit": [
+                    "tight", "puff", "loose", "upper loose",
+                ],
+                "style": [
+                    "1-sleeve", "layer", "flowery", "pin ending",
+                ]
+            },
+            "leg": {
+                "length": [
+                    "long", "short",
+                ],
+                "fit": [
+                    "tight", "puff", "loose", "upper loose",
+                ],
+                "style": [
+                    "layer", "flowery", "pin ending",
+                ]
+            },
+            "accessories": [
+                "bow", "ruffle", "band", "belt", "others",
+            ],
+        },
+        "one-piece swimwear": {
+            "neck": [
+                "Collar",
+                "tuttle",
+                "round",
+                "v-shape",
+                "bustier"
+            ],
+            "body": {
+                "zipper/button": [
+                    "symmetry", "asymmetry",
+                ],
+                "length": [
+                    "chest",
+                ],
+                "fit": [
+                    "fit",
+                ],
+                "style": [
+                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer",
+                ]
+            },
+            "sleeve": {
+                "length": [
+                    "long", "short", "sleeveless"
+                ],
+                "style": [
+                    "1-sleeve",
+                ]
+            },
+            "leg": {
+                "length": [
+                    "long", "short",
+                ],
+                "fit": [
+                    "tight",
+                ],
+                "style": [
+                    "layer",
+                ]
+            },
+            "accessories": [
+                "bow", "ruffle", "band", "belt", "others",
+            ],
+        }
+    },
 };
 
 function renderLabels(data, parentElement) {
