@@ -71,7 +71,7 @@ const labelList = document.getElementById('label-list');
 // Cấu trúc dữ liệu label
 const LABELS = {
     "top": {
-        "neck": [
+        "top-neck": [
             "Collar",
             "tuttle",
             "round",
@@ -79,7 +79,7 @@ const LABELS = {
             "bustier",
             "hoodie",
         ],
-        "body": {
+        "top-body": {
             "zipper/button": [
                 "symmetry", "asymmetry",
             ],
@@ -110,7 +110,7 @@ const LABELS = {
     },
     "bottom": {
         "skirt": {
-            "body": {
+            "bottom-body": {
                 "length": [
                     "long", "short", "sleeveless"
                 ],
@@ -145,14 +145,14 @@ const LABELS = {
     },
     "whole-body": {
         "dress/long coat": {
-            "neck": [
+            "dress/long coat-neck": [
                 "Collar",
                 "tuttle",
                 "round",
                 "v-shape",
                 "bustier",
             ],
-            "body": {
+            "whole-body-body": {
                 "zipper/button": [
                     "symmetry", "asymmetry",
                 ],
@@ -182,7 +182,7 @@ const LABELS = {
             ],
         },
         "jumpsuit": {
-            "neck": [
+            "jumpsuit-neck": [
                 "Collar",
                 "tuttle",
                 "round",
@@ -190,7 +190,7 @@ const LABELS = {
                 "bustier",
                 "hoodie",
             ],
-            "body": {
+            "jumpsuit-body": {
                 "zipper/button": [
                     "symmetry", "asymmetry",
                 ],
@@ -231,14 +231,14 @@ const LABELS = {
             ],
         },
         "one-piece swimwear": {
-            "neck": [
+            "swimwear-neck": [
                 "Collar",
                 "tuttle",
                 "round",
                 "v-shape",
                 "bustier"
             ],
-            "body": {
+            "swimwear-body": {
                 "zipper/button": [
                     "symmetry", "asymmetry",
                 ],
@@ -361,6 +361,7 @@ renderLabels(LABELS, labelList);
 
 // Xử lý khi chọn ảnh
 todoList.addEventListener('click', (e) => {
+    HideTodoList()
     const image = e.target.textContent;
     imageShowed = image;
     updateLabelsForImage(image);
@@ -407,6 +408,7 @@ function updateLabelsLevels(labels, parent, imageLabels) {
             continue
         }
         const checkbox = document.querySelector(`li[name="${label}"].label_1`);
+        console.log(checkbox)
         if (checkbox.querySelector("li.label_1") === null) {
             for (const idx in imageLabels[label]) {
                 const child = imageLabels[label][idx]
@@ -417,9 +419,6 @@ function updateLabelsLevels(labels, parent, imageLabels) {
             }
         }
         else {
-            console.log(labels[label])
-            console.log(checkbox)
-            console.log(imageLabels[label][label])
             updateLabelsLevels(labels[label], checkbox, imageLabels[label][label])
         }
     }
@@ -495,7 +494,7 @@ function getCheckedLabels() {
     });
     // getLabels[imageShowed] = attributes;
     labelsImages[imageShowed]["labels"] = attributes
-
+    console.log(attributes)
 }
 
 function GetTest(e1) {
@@ -511,6 +510,7 @@ function GetTest(e1) {
 
             labels2.forEach(e2 => {
                 if (e2.checked) {
+                    console.log(e2)
                     attributes.push(e2.name);
                 }
             });
@@ -568,4 +568,50 @@ loadJsonButton.addEventListener('click', () => {
         };
         reader.readAsText(file);
     });
+});
+
+
+function HideTodoList() {
+    const labels1 = labelList.querySelectorAll('li.label_1');
+    labels1.forEach(e1 => {
+        if (e1.parentNode !== labelList) {
+            return
+        }
+        if (e1.querySelector('li.label_1') === null) {
+        }
+        else {
+            if (e1.parentNode !== labelList) {
+                return
+            }
+            HideChildTodoList(e1)
+            const iconSpan = e1.querySelector(".toggle-icon");
+            const childsContainer = e1.querySelector(".childs-container")
+            iconSpan.textContent = '+';
+            childsContainer.style.display = "none";
+        }
+    });
+}
+function HideChildTodoList(e1) {
+    const parents = e1.querySelectorAll('li.label_1');
+    parents.forEach(parent => {
+        if (parent.parentNode.parentNode !== e1) {
+            return
+        }
+        if (parent.querySelector('li.label_1') === null) {
+            const iconSpan = parent.querySelector(".toggle-icon");
+            const childsContainer = parent.querySelector(".childs-container")
+            iconSpan.textContent = '+';
+            childsContainer.style.display = "none";
+        }
+        else {
+            HideChildTodoList(parent)
+            const iconSpan = parent.querySelector(".toggle-icon");
+            const childsContainer = parent.querySelector(".childs-container")
+            iconSpan.textContent = '+';
+            childsContainer.style.display = "none";
+        }
+    })
+}
+document.addEventListener("DOMContentLoaded", function () {
+    HideTodoList()
 });
