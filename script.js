@@ -3,10 +3,8 @@ const todoList = document.getElementById('todo-list');
 const btnLoadImage = document.getElementById('btn-load-image');
 const loadJsonButton = document.getElementById('load-json-button');
 const imageGarmentViewer = document.getElementById('image-garment');
-const imageModelViewer = document.getElementById('image-model');
 let labelsImages = {}
 let listGarmentImages = []
-let listModelImages = []
 
 btnLoadImage.addEventListener('click', () => {
     // Hiển thị hộp thoại chọn ảnh
@@ -21,22 +19,10 @@ btnLoadImage.addEventListener('click', () => {
         listModelImages = []
         const files = input.files;
         Array.from(files).filter(file => {
-            if (file.name.includes("_0.")) {
-                listGarmentImages.push(file)
-            }
-        })
-        Array.from(listGarmentImages).filter(fileGarment => {
-            Array.from(files).filter(file => {
-                if (fileGarment.name !== file.name &&
-                    file.name.includes("_1.") &&
-                    fileGarment.name.split('_')[0] === file.name.split('_')[0]) {
-                    listModelImages.push(file)
-                }
-            })
+            listGarmentImages.push(file)
         })
         for (let i = 0; i < listGarmentImages.length; i++) {
             const fileGarment = listGarmentImages[i];
-            const fileModel = listModelImages[i];
 
             // Tạo phần tử mới trong danh sách ảnh
             const li = document.createElement('li');
@@ -48,13 +34,6 @@ btnLoadImage.addEventListener('click', () => {
                     imageGarmentViewer.src = readerGarment.result;
                 };
                 readerGarment.readAsDataURL(fileGarment);
-
-                // Hiển thị ảnh được chọn
-                const readerModel = new FileReader();
-                readerModel.onload = () => {
-                    imageModelViewer.src = readerModel.result;
-                };
-                readerModel.readAsDataURL(fileModel);
             });
             todoList.appendChild(li);
             labelsImages[fileGarment.name] = {
