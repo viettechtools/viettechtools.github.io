@@ -29,6 +29,9 @@ btnLoadImage.addEventListener('click', () => {
             li.textContent = fileGarment.name;
             li.addEventListener('click', () => {
                 // Hiển thị ảnh được chọn
+                if (imageGarmentViewer.getAttribute('src') !== "") {
+                    const checkedLabels = getCheckedLabels();
+                }
                 const readerGarment = new FileReader();
                 readerGarment.onload = () => {
                     imageGarmentViewer.src = readerGarment.result;
@@ -344,6 +347,11 @@ todoList.addEventListener('click', (e) => {
     const image = e.target.textContent;
     imageShowed = image;
     updateLabelsForImage(image);
+    const imageLabels = getLabelsForImage(image);
+    const cleanedData = cleanObject(imageLabels);
+    const jsonData = JSON.stringify(cleanedData, null, 2);
+    document.getElementById('json-data').innerHTML = jsonData;
+    hljs.highlightElement(document.getElementById('json-data'));
 });
 
 function updateLabelsForImage(image) {
@@ -594,3 +602,22 @@ function HideChildTodoList(e1) {
 document.addEventListener("DOMContentLoaded", function () {
     HideTodoList()
 });
+
+function cleanObject(obj) {
+    const cleanObj = {};
+
+    for (let key in obj) {
+        if (Array.isArray(obj[key]) && obj[key].length > 0) {
+            cleanObj[key] = obj[key];
+        } else if (typeof obj[key] === 'object') {
+            const nestedCleanObj = cleanObject(obj[key]);
+            if (Object.keys(nestedCleanObj).length > 0) {
+                cleanObj[key] = nestedCleanObj;
+            }
+        }
+    }
+
+    return cleanObj;
+}
+
+

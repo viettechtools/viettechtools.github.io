@@ -22,7 +22,7 @@ li {
   width: 300px;
   border: 1px solid #ccc;
   padding: 10px;
-  
+
   max-height: 600px;
   min-height: 600px;
   overflow-y: auto;
@@ -95,7 +95,7 @@ li {
 
 .image-viewer {
   max-width: 100%;
-  max-height: 500px;
+  max-height: 300px;
 }
 
 #save-button {
@@ -129,4 +129,11 @@ li {
 
 .toggle-icon:hover {
   background-color: #ccc;
+}
+
+.json-data {
+  width: 100%;
+  max-height: 600px;
+  min-height: 600px;
+  overflow-y: auto;
 }
