@@ -3,11 +3,23 @@ body {
   margin: 20px;
 }
 
+h6{
+  margin: 0;
+  font-size: 12px;
+}
+
 li {
   list-style-type: none;
 }
+.li_image{
+  margin: 5px 0px;
+}
+.li_image:hover{
+  cursor: pointer;
+  background-color: #ccc;
+}
 
-.icon-and-text-container {
+.parentLabel {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -24,13 +36,13 @@ li {
   padding: 10px;
 
   max-height: 600px;
-  min-height: 600px;
+  height: 300px;
   overflow-y: auto;
 
   position: relative;
 }
 
-#todo-list {
+#list-images {
   list-style: none;
   padding: 0;
 }
@@ -131,9 +143,8 @@ li {
   background-color: #ccc;
 }
 
-.json-data {
+#json-data {
   width: 100%;
-  max-height: 600px;
-  min-height: 600px;
+  height: 320px;
   overflow-y: auto;
 }

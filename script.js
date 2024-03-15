@@ -1,51 +1,12 @@
 let imageShowed = "";
-const todoList = document.getElementById('todo-list');
+const listImages = document.getElementById('list-images');
 const btnLoadImage = document.getElementById('btn-load-image');
 const loadJsonButton = document.getElementById('load-json-button');
+const saveJsonButton = document.getElementById('save-json-button');
+const nameImage = document.getElementById('name-image');
 const imageGarmentViewer = document.getElementById('image-garment');
 let labelsImages = {}
 let listGarmentImages = []
-
-btnLoadImage.addEventListener('click', () => {
-    // Hiển thị hộp thoại chọn ảnh
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.multiple = true;
-    input.click();
-
-    // Xử lý khi chọn ảnh
-    input.addEventListener('change', () => {
-        listGarmentImages = []
-        listModelImages = []
-        const files = input.files;
-        Array.from(files).filter(file => {
-            listGarmentImages.push(file)
-        })
-        for (let i = 0; i < listGarmentImages.length; i++) {
-            const fileGarment = listGarmentImages[i];
-
-            // Tạo phần tử mới trong danh sách ảnh
-            const li = document.createElement('li');
-            li.textContent = fileGarment.name;
-            li.addEventListener('click', () => {
-                // Hiển thị ảnh được chọn
-                if (imageGarmentViewer.getAttribute('src') !== "") {
-                    const checkedLabels = getCheckedLabels();
-                }
-                const readerGarment = new FileReader();
-                readerGarment.onload = () => {
-                    imageGarmentViewer.src = readerGarment.result;
-                };
-                readerGarment.readAsDataURL(fileGarment);
-            });
-            todoList.appendChild(li);
-            labelsImages[fileGarment.name] = {
-                name: fileGarment.name,
-                labels: {},
-            }
-        }
-    });
-});
 
 // Tạo danh sách label
 const labelList = document.getElementById('label-list');
@@ -53,327 +14,268 @@ const labelList = document.getElementById('label-list');
 // Cấu trúc dữ liệu label
 const LABELS = {
     "top": {
-        "top-neck": [
-            "Collar",
-            "tuttle",
-            "round",
-            "v-shape",
-            "bustier",
-            "hoodie",
-        ],
+        "top-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie",],
         "top-body": {
-            "zipper/button": [
-                "symmetry", "asymmetry",
-            ],
-            "length": [
-                "chest", "belly", "normal", "long",
-            ],
-            "fit": [
-                "fit", "loose", "puff",
-            ],
-            "style": [
-                "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",
-            ]
+            "zipper/button": ["symmetry", "asymmetry",],
+            "length": ["chest", "belly", "normal", "long",],
+            "fit": ["fit", "loose", "puff",],
+            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",]
         },
         "sleeve": {
-            "length": [
-                "long", "short", "sleeveless"
-            ],
-            "fit": [
-                "tight", "puff", "loose", "upper loose",
-            ],
-            "style": [
-                "1-sleeve", "layer", "flowery", "pin ending",
-            ]
+            "length": ["long", "short", "sleeveless"],
+            "fit": ["tight", "puff", "loose", "upper loose",],
+            "style": ["1-sleeve", "layer", "flowery", "pin ending",]
         },
-        "accessories": [
-            "bow", "ruffle", "band", "belt", "others",
-        ],
+        "accessories": ["bow", "ruffle", "band", "belt", "others",],
     },
     "bottom": {
         "skirt": {
             "bottom-body": {
-                "length": [
-                    "long", "short", "sleeveless"
-                ],
-                "fit": [
-                    "tight", "puff", "loose", "upper loose",
-                ],
-                "style": [
-                    "1-sleeve", "layer", "flowery", "pin ending",
-                ]
+                "length": ["long", "short", "sleeveless"],
+                "fit": ["tight", "puff", "loose", "upper loose",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
             },
-            "accessories": [
-                "bow", "ruffle", "band", "belt", "others",
-            ],
+            "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "pant": {
             "leg": {
-                "length": [
-                    "long", "short",
-                ],
-                "fit": [
-                    "tight", "puff", "loose", "upper loose",
-                ],
-                "style": [
-                    "layer", "flowery", "pin ending",
-                ]
+                "length": ["long", "short",],
+                "fit": ["tight", "puff", "loose", "upper loose",],
+                "style": ["layer", "flowery", "pin ending",]
             },
-            "accessories": [
-                "bow", "ruffle", "band", "belt", "others",
-            ],
+            "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "panty": ["panty"],
     },
     "whole-body": {
         "dress/long coat": {
-            "dress/long coat-neck": [
-                "Collar",
-                "tuttle",
-                "round",
-                "v-shape",
-                "bustier",
-            ],
+            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "bustier",],
             "whole-body-body": {
-                "zipper/button": [
-                    "symmetry", "asymmetry",
-                ],
-                "length": [
-                    "mini", "middle", "long",
-                ],
-                "fit": [
-                    "fit", "loose", "puff",
-                ],
-                "style": [
-                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",
-                ]
+                "zipper/button": ["symmetry", "asymmetry",],
+                "length": ["mini", "middle", "long",],
+                "fit": ["fit", "loose", "puff",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",]
             },
             "sleeve": {
-                "length": [
-                    "long", "short", "sleeveless"
-                ],
-                "fit": [
-                    "tight", "puff", "loose", "upper loose",
-                ],
-                "style": [
-                    "1-sleeve", "layer", "flowery", "pin ending",
-                ]
+                "length": ["long", "short", "sleeveless"],
+                "fit": ["tight", "puff", "loose", "upper loose",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
             },
-            "accessories": [
-                "bow", "ruffle", "band", "belt", "others",
-            ],
+            "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
-            "jumpsuit-neck": [
-                "Collar",
-                "tuttle",
-                "round",
-                "v-shape",
-                "bustier",
-                "hoodie",
-            ],
+            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie",],
             "jumpsuit-body": {
-                "zipper/button": [
-                    "symmetry", "asymmetry",
-                ],
-                "length": [
-                    "chest",
-                ],
-                "fit": [
-                    "fit", "loose", "puff",
-                ],
-                "style": [
-                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "flowery", "pin", "pin-ending",
-                ]
+                "zipper/button": ["symmetry", "asymmetry",],
+                "length": ["chest",],
+                "fit": ["fit", "loose", "puff",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "flowery", "pin", "pin-ending",]
             },
             "sleeve": {
-                "length": [
-                    "long", "short", "sleeveless"
-                ],
-                "fit": [
-                    "tight", "puff", "loose", "upper loose",
-                ],
-                "style": [
-                    "1-sleeve", "layer", "flowery", "pin ending",
-                ]
+                "length": ["long", "short", "sleeveless"],
+                "fit": ["tight", "puff", "loose", "upper loose",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
             },
             "leg": {
-                "length": [
-                    "long", "short",
-                ],
-                "fit": [
-                    "tight", "puff", "loose", "upper loose",
-                ],
-                "style": [
-                    "layer", "flowery", "pin ending",
-                ]
+                "length": ["long", "short",],
+                "fit": ["tight", "puff", "loose", "upper loose",],
+                "style": ["layer", "flowery", "pin ending",]
             },
-            "accessories": [
-                "bow", "ruffle", "band", "belt", "others",
-            ],
+            "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
-            "swimwear-neck": [
-                "Collar",
-                "tuttle",
-                "round",
-                "v-shape",
-                "bustier"
-            ],
+            "swimwear-neck": ["Collar",
+                "tuttle", "round", "v-shape", "bustier"],
             "swimwear-body": {
-                "zipper/button": [
-                    "symmetry", "asymmetry",
-                ],
-                "length": [
-                    "chest",
-                ],
-                "fit": [
-                    "fit",
-                ],
-                "style": [
-                    "Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer",
-                ]
+                "zipper/button": ["symmetry", "asymmetry",],
+                "length": ["chest",],
+                "fit": ["fit",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer",]
             },
             "sleeve": {
-                "length": [
-                    "long", "short", "sleeveless"
-                ],
-                "style": [
-                    "1-sleeve",
-                ]
+                "length": ["long", "short", "sleeveless"],
+                "style": ["1-sleeve",]
             },
             "leg": {
-                "length": [
-                    "long", "short",
-                ],
-                "fit": [
-                    "tight",
-                ],
-                "style": [
-                    "layer",
-                ]
+                "length": ["long", "short",],
+                "fit": ["tight",],
+                "style": ["layer",]
             },
-            "accessories": [
-                "bow", "ruffle", "band", "belt", "others",
-            ],
+            "accessories": ["bow", "ruffle", "band", "belt", "others",],
         }
     },
 };
 
-function renderLabels(data, parentElement) {
-    parentElement.innerHTML = "";
 
-    for (const labelCategory in data) {
+// TODO: FUNCTION HANDLE LOAD IMAGES
+btnLoadImage.addEventListener('click', () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.click();
+
+    input.addEventListener('change', () => {
+        listGarmentImages = []
+        const files = input.files;
+        Array.from(files).filter(file => {
+            listGarmentImages.push(file)
+        })
+        for (let i = 0; i < listGarmentImages.length; i++) {
+            const fileGarment = listGarmentImages[i];
+
+            const li = document.createElement('li');
+            li.classList.add('li_image');
+            li.textContent = fileGarment.name;
+            li.addEventListener('click', () => {
+                if (imageGarmentViewer.getAttribute('src') !== "") {
+                    GetListLabelsChecked();
+                }
+                const readerGarment = new FileReader();
+                readerGarment.onload = () => {
+                    imageGarmentViewer.src = readerGarment.result;
+                };
+                readerGarment.readAsDataURL(fileGarment);
+                nameImage.innerText = fileGarment.name;
+                HandleChooseImage();
+            });
+            listImages.appendChild(li);
+            labelsImages[fileGarment.name] = {
+                name: fileGarment.name,
+                labels: {},
+            }
+        }
+        console.log(labelsImages)
+    });
+});
+
+// TODO: LOAD LIST LABELS
+const RenderLabels = (listLabels, parentElement, keyParent) => {
+    for (const label in listLabels) {
         const categoryElement = document.createElement('li');
         categoryElement.classList.add('category');
         categoryElement.classList.add('label_1');
-        categoryElement.setAttribute('name', labelCategory);
-
-        // Tạo checkbox cho label bậc 1
-        // const categoryCheckbox = document.createElement('input');
-        // categoryCheckbox.classList.add('label_1');
-        // categoryCheckbox.type = 'checkbox';
-        // categoryCheckbox.name = labelCategory;
-        // categoryElement.appendChild(categoryCheckbox);
+        categoryElement.setAttribute('name', `${keyParent}_${label}`);
 
         const divContainer = document.createElement('div');
-        divContainer.classList.add('icon-and-text-container')
+        divContainer.classList.add('parentLabel')
 
-
-        // Add Icon to li tag
+        // Add icon
         const iconSpan = document.createElement('span');
         iconSpan.classList.add("toggle-icon");
         iconSpan.textContent = '-';
         iconSpan.addEventListener('click', (e) => {
             const parent = e.target.parentNode.parentNode;
-            const childs = parent.querySelector(".childs-container");
-            if (childs.style.display !== "none") {
+            const child = parent.querySelector(".child-container");
+            if (child.style.display !== "none") {
                 iconSpan.textContent = "+";
-                childs.style.display = "none";
+                child.style.display = "none";
             } else {
                 iconSpan.textContent = "-";
-                childs.style.display = "block";
+                child.style.display = "block";
             }
         });
         divContainer.appendChild(iconSpan);
 
         const pElement = document.createElement('p');
-        pElement.textContent = labelCategory;
+        pElement.textContent = label;
         divContainer.appendChild(pElement);
 
         categoryElement.appendChild(divContainer);
 
         const ul = document.createElement('ul');
-        ul.classList.add("childs-container");
-
-        if (Array.isArray(data[labelCategory]) || typeof data[labelCategory] === 'string') {
-            // If it's an array or string, render the items
-            renderLabelsItems(data[labelCategory], ul);
+        ul.classList.add("child-container");
+        if (Array.isArray(listLabels[label]) || typeof listLabels[label] === 'string') {
+            RenderChildLabels(listLabels[label], ul, `${keyParent}_${label}`);
         } else {
-            // If it's an object, recursively render its children
-            renderLabels(data[labelCategory], ul);
+            RenderLabels(listLabels[label], ul, `${keyParent}_${label}`);
         }
 
         categoryElement.appendChild(ul);
         parentElement.appendChild(categoryElement);
     }
 }
+const RenderChildLabels = (listLabels, parentElement, keyParent) => {
+    for (const label in listLabels) {
+        const li = document.createElement('li');
+        const checkbox = document.createElement('input');
+        const labelName = listLabels[label];
+        checkbox.type = 'checkbox';
+        checkbox.name = `${keyParent}_${labelName}`;
+        checkbox.classList.add('label_2');
 
-function renderLabelsItems(items, parentElement) {
-    for (const idx in items) {
-        if (typeof items[idx] === "object") {
-            renderLabels(items[idx], parentElement);
-        } else {
-            const li = document.createElement('li');
-            const checkbox = document.createElement('input');
-            const labelName = items[idx];
-            checkbox.type = 'checkbox';
-            checkbox.name = labelName;
-            checkbox.classList.add('label_2');
-
-            li.appendChild(checkbox);
-            li.appendChild(document.createTextNode(labelName));
-            parentElement.appendChild(li);
-        }
+        li.appendChild(checkbox);
+        li.appendChild(document.createTextNode(labelName));
+        parentElement.appendChild(li);
     }
 }
 
-// Call the function to render the labels
-renderLabels(LABELS, labelList);
+// TODO: SHORTED LIST LABELS UI - when choose another image
+const HandleShortedListLabels = () => {
+    const labelsParent = labelList.querySelectorAll('li.label_1');
+    labelsParent.forEach(label => {
+        if (label.parentNode !== labelList) return
+        HandleShortedChildLabels(label)
+        const iconSpan = label.querySelector(".toggle-icon");
+        const childContainer = label.querySelector(".child-container")
+        iconSpan.textContent = '+';
+        childContainer.style.display = "none";
+    });
+}
+const HandleShortedChildLabels = (childLabels) => {
+    const labelsParent = childLabels.querySelectorAll('li.label_1');
+    labelsParent.forEach(label => {
+        if (label.parentNode.parentNode !== childLabels) {
+            return
+        }
+        // Nếu không còn object trong đó nữa
+        if (label.querySelector('li.label_1') === null) {
+            const iconSpan = label.querySelector(".toggle-icon");
+            const childContainer = label.querySelector(".child-container")
+            iconSpan.textContent = '+';
+            childContainer.style.display = "none";
+        }
+        else {
+            HandleShortedChildLabels(label)
+            const iconSpan = label.querySelector(".toggle-icon");
+            const childContainer = label.querySelector(".child-container")
+            iconSpan.textContent = '+';
+            childContainer.style.display = "none";
+        }
+    })
+}
 
-// Xử lý khi chọn ảnh
-todoList.addEventListener('click', (e) => {
-    HideTodoList()
-    const image = e.target.textContent;
-    imageShowed = image;
-    updateLabelsForImage(image);
-    const imageLabels = getLabelsForImage(image);
-    const cleanedData = cleanObject(imageLabels);
-    const jsonData = JSON.stringify(cleanedData, null, 2);
-    document.getElementById('json-data').innerHTML = jsonData;
-    hljs.highlightElement(document.getElementById('json-data'));
-});
+// TODO: CLEAR CHECKBOX CHECKED
+const ResetChecked = () => {
+    const checkboxes = labelList.querySelectorAll('input[type="checkbox"]')
+    for (const idx in checkboxes) {
+        checkboxes[idx].checked = false
+    }
+}
 
-function updateLabelsForImage(image) {
-    resetChecked()
-    const imageLabels = getLabelsForImage(image);
-
-    for (const labelName in LABELS) {
-        const checkbox = document.querySelector(`li[name="${labelName}"].label_1`);
+// TODO: CHECKED CHECKBOX OF IMAGES
+const GetCheckedLabels = () => {
+    return labelsImages[nameImage.innerText]["labels"]
+}
+const CheckedCheckboxImage = () => {
+    const listCheckboxChecked = GetCheckedLabels();
+    if (isEmpty(listCheckboxChecked)) return
+    for (const label in LABELS) {
+        const checkbox = document.querySelector(`li[name="_${label}"].label_1`);
         if (checkbox.parentNode !== labelList) {
             continue
         }
+        // Nếu mà không còn object trong đó nữa
         if (checkbox.querySelector("li.label_1") === null) {
-            for (const idx in LABELS[labelName]) {
-                const child = LABELS[labelName][idx]
-                const childBox = checkbox.querySelector(`input[name="${child}"].label_2`)
-                if (imageLabels["labels"][labelName] && imageLabels["labels"][labelName].includes(child)) {
+            for (const idx in LABELS[label]) {
+                const child = LABELS[label][idx]
+                const childBox = checkbox.querySelector(`input[name="_${label}_${child}"].label_2`)
+                if (listCheckboxChecked[label] && listCheckboxChecked[label].includes(child)) {
                     childBox.checked = true
                 }
             }
         }
         else {
-            updateLabelsLevels(LABELS[labelName], checkbox, imageLabels["labels"][labelName])
+            CheckedChildCheckboxImage(LABELS[label], checkbox, listCheckboxChecked[label], `_${label}`)
         }
         // const ulBox = checkbox.parentNode.querySelector('ul')
         // if (imageLabels["labels"][labelName] !== undefined) {
@@ -388,166 +290,132 @@ function updateLabelsForImage(image) {
         // }
     }
 }
-
-function updateLabelsLevels(labels, parent, imageLabels) {
-    for (const label in labels) {
-        if (imageLabels[label] === undefined) {
+const CheckedChildCheckboxImage = (listLabels, parent, labelsChecked, keyParent) => {
+    for (const label in listLabels) {
+        // console.log(labelsChecked)
+        // console.log(label)
+        // console.log(labelsChecked[label])
+        if (labelsChecked === undefined || isEmpty(labelsChecked[label]) || labelsChecked[label] === undefined || labelsChecked[label].length === 0) {
             continue
         }
-        const checkbox = document.querySelector(`li[name="${label}"].label_1`);
-        console.log(checkbox)
+        const checkbox = document.querySelector(`li[name="${keyParent}_${label}"].label_1`);
         if (checkbox.querySelector("li.label_1") === null) {
-            for (const idx in imageLabels[label]) {
-                const child = imageLabels[label][idx]
-                const childBox = checkbox.querySelector(`input[name="${child}"].label_2`)
-                if (imageLabels[label].includes(child)) {
+            for (const idx in labelsChecked[label]) {
+                const child = labelsChecked[label][idx]
+                const childBox = checkbox.querySelector(`input[name="${keyParent}_${label}_${child}"].label_2`)
+                if (labelsChecked[label].includes(child)) {
                     childBox.checked = true
                 }
             }
         }
         else {
-            updateLabelsLevels(labels[label], checkbox, imageLabels[label][label])
+            CheckedChildCheckboxImage(listLabels[label], checkbox, labelsChecked[label], `${keyParent}_${label}`)
         }
     }
 }
 
-const resetChecked = () => {
-    const checkboxes = labelList.querySelectorAll('input[type="checkbox"]')
-    for (const idx in checkboxes) {
-        checkboxes[idx].checked = false
-    }
-}
+// TODO: GET LIST LABELS CHECKED OF IMAGE SHOWED
+const GetListLabelsChecked = () => {
+    const listLabels = labelList.querySelectorAll('li.label_1');
 
-const getLabelsForImage = (image) => {
-    return labelsImages[image]
-}
-
-// Xử lý sự kiện thay đổi checkbox
-labelList.addEventListener('change', (e) => {
-    const checkbox = e.target;
-    const labelName = checkbox.name;
-
-    if (Array.isArray(LABELS[labelName])) {
-        console.log("Handle checked 1")
-        const ulBox = checkbox.parentNode.querySelector('ul')
-        const childCheckbox = ulBox.querySelectorAll('input[type="checkbox"]')
-        childCheckbox.forEach(child => {
-            child.checked = checkbox.checked;
-        });
-    } else {
-        console.log("Handle checked 2")
-    }
-});
-
-const saveButton = document.getElementById('save-button');
-saveButton.addEventListener('click', () => {
-    if (imageGarmentViewer.getAttribute('src') !== "") {
-        const checkedLabels = getCheckedLabels();
-    }
-    else {
-        console.log("Load image")
-    }
-});
-
-// Hàm lấy danh sách các checkbox đã được chọn
-function getCheckedLabels() {
-    const labels1 = labelList.querySelectorAll('li.label_1');
-    // let getLabels = {};
-
-    let attributes = {};
-    labels1.forEach(e1 => {
-        if (e1.parentNode !== labelList) {
+    let labelsChecked = {};
+    listLabels.forEach(label => {
+        // Không phải label lớn nhất, return
+        if (label.parentNode !== labelList) {
             return
         }
-        if (e1.querySelector('li.label_1') === null) {
-            const labels2 = e1.querySelectorAll('input.label_2');
-            let temp = []
-            labels2.forEach(e2 => {
-                if (e2.checked) {
-                    temp.push(e2.name);
+        // Nếu không còn object nào ở trong
+        if (label.querySelector('li.label_1') === null) {
+            const childLabels = label.querySelectorAll('input.label_2');
+            let childChecked = []
+            childLabels.forEach(child => {
+                if (child.checked) {
+                    childChecked.push(child.parentNode.textContent);
                 }
             });
-            if (temp.length > 0) {
-                attributes[e1.querySelector('p').textContent] = temp
+            if (childChecked.length > 0) {
+                labelsChecked[label.querySelector('p').textContent] = childChecked
             }
         }
+        // Nếu còn objects trong đó
         else {
-            if (e1.parentNode !== labelList) {
-                return
+            let childChecked = GetListChildLabelsChecked(label)
+            if (!isEmpty(childChecked)) {
+                labelsChecked[label.querySelector('p').textContent] = { ...labelsChecked[label.querySelector('p').textContent], ...childChecked }
             }
-            let res = GetTest(e1)
-            attributes = { ...attributes, ...res }
         }
     });
     // getLabels[imageShowed] = attributes;
-    labelsImages[imageShowed]["labels"] = attributes
-    console.log(attributes)
+    labelsImages[nameImage.innerText]["labels"] = labelsChecked
+    console.log(JSON.stringify(labelsChecked))
 }
-
-function GetTest(e1) {
-    const parents = e1.querySelectorAll('li.label_1');
+const GetListChildLabelsChecked = (childLabel) => {
+    const listLabels = childLabel.querySelectorAll('li.label_1');
     let res = {}
-    parents.forEach(parent => {
-        let attributes = [];
-        if (parent.parentNode.parentNode !== e1) {
+    listLabels.forEach(label => {
+        let labelChecked = [];
+        // Nếu mà không thuộc trực tiếp thẻ childLabel
+        if (label.parentNode.parentNode !== childLabel) {
             return
         }
-        if (parent.querySelector('li.label_1') === null) {
-            const labels2 = parent.querySelectorAll('input.label_2');
-
+        // Nếu không còn object nào 
+        if (label.querySelector('li.label_1') === null) {
+            const labels2 = label.querySelectorAll('input.label_2');
             labels2.forEach(e2 => {
                 if (e2.checked) {
-                    console.log(e2)
-                    attributes.push(e2.name);
+                    labelChecked.push(e2.parentNode.textContent);
                 }
             });
-
-            if (attributes.length > 0) {
-                res[parent.querySelector('p').textContent] = attributes
+            if (labelChecked.length > 0) {
+                res[label.querySelector('p').textContent] = labelChecked
             }
         }
         else {
-            let temp = GetTest(parent)
-            res[parent.querySelector('p').textContent] = temp
+            let temp = GetListChildLabelsChecked(label)
+            if (!isEmpty(temp)) {
+                res[label.querySelector('p').textContent] = temp
+            }
         }
     })
-    let final_res = {}
-    final_res[e1.querySelector("p").textContent] = res
-    return final_res
+    return res
 }
 
-const saveJsonButton = document.getElementById('save-json-button');
+// TODO: HANDLE WHEN CHOOSE IMAGES
+const HandleChooseImage = () => {
+    HandleShortedListLabels();
+    ResetChecked();
+    CheckedCheckboxImage();
+
+    // TODO: Show json 
+    const listCheckboxChecked = GetCheckedLabels();
+    const jsonData = JSON.stringify(listCheckboxChecked, null, 2);
+    document.getElementById('json-data').innerHTML = jsonData;
+    hljs.highlightElement(document.getElementById('json-data'));
+}
+
+// TODO: HANDLE BUTTON_JSON(load, save)
 saveJsonButton.addEventListener('click', () => {
     console.log(labelsImages)
-    const jsonString = JSON.stringify(labelsImages, null, 2); // thêm null và 2 để định dạng đẹp
+    const jsonString = JSON.stringify(labelsImages, null, 2);
 
-    // Tạo một blob từ chuỗi JSON
     const blob = new Blob([jsonString], { type: 'application/json' });
 
-    // Tạo một đường link để tải về blob
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = 'labels.json';
-
-    // Thêm đường link vào DOM và kích hoạt sự kiện click
     document.body.appendChild(a);
     a.click();
-
-    // Loại bỏ đường link từ DOM
     document.body.removeChild(a);
 });
-
 loadJsonButton.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
     input.click();
 
-    // Lấy file JSON được chọn
     input.addEventListener('change', () => {
         const file = input.files[0];
 
-        // Đọc dữ liệu JSON từ file
         const reader = new FileReader();
         reader.onload = () => {
             const jsonData = JSON.parse(reader.result);
@@ -557,67 +425,14 @@ loadJsonButton.addEventListener('click', () => {
     });
 });
 
+function isEmpty(obj) {
+    return obj === undefined || Object.keys(obj).length === 0;
+}
 
-function HideTodoList() {
-    const labels1 = labelList.querySelectorAll('li.label_1');
-    labels1.forEach(e1 => {
-        if (e1.parentNode !== labelList) {
-            return
-        }
-        if (e1.querySelector('li.label_1') === null) {
-        }
-        else {
-            if (e1.parentNode !== labelList) {
-                return
-            }
-            HideChildTodoList(e1)
-            const iconSpan = e1.querySelector(".toggle-icon");
-            const childsContainer = e1.querySelector(".childs-container")
-            iconSpan.textContent = '+';
-            childsContainer.style.display = "none";
-        }
-    });
-}
-function HideChildTodoList(e1) {
-    const parents = e1.querySelectorAll('li.label_1');
-    parents.forEach(parent => {
-        if (parent.parentNode.parentNode !== e1) {
-            return
-        }
-        if (parent.querySelector('li.label_1') === null) {
-            const iconSpan = parent.querySelector(".toggle-icon");
-            const childsContainer = parent.querySelector(".childs-container")
-            iconSpan.textContent = '+';
-            childsContainer.style.display = "none";
-        }
-        else {
-            HideChildTodoList(parent)
-            const iconSpan = parent.querySelector(".toggle-icon");
-            const childsContainer = parent.querySelector(".childs-container")
-            iconSpan.textContent = '+';
-            childsContainer.style.display = "none";
-        }
-    })
-}
+// TODO: MAIN()
+RenderLabels(LABELS, labelList, "");
 document.addEventListener("DOMContentLoaded", function () {
-    HideTodoList()
+    setTimeout(() => {
+        HandleShortedListLabels()
+    }, 1000)
 });
-
-function cleanObject(obj) {
-    const cleanObj = {};
-
-    for (let key in obj) {
-        if (Array.isArray(obj[key]) && obj[key].length > 0) {
-            cleanObj[key] = obj[key];
-        } else if (typeof obj[key] === 'object') {
-            const nestedCleanObj = cleanObject(obj[key]);
-            if (Object.keys(nestedCleanObj).length > 0) {
-                cleanObj[key] = nestedCleanObj;
-            }
-        }
-    }
-
-    return cleanObj;
-}
-
-
