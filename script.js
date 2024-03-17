@@ -413,15 +413,28 @@ loadJsonButton.addEventListener('click', () => {
     input.accept = '.json';
     input.click();
 
-    input.addEventListener('change', () => {
+    input.addEventListener('change', async () => {
         const file = input.files[0];
-
         const reader = new FileReader();
-        reader.onload = () => {
-            const jsonData = JSON.parse(reader.result);
-            labelsImages = jsonData
-        };
+        const parseJsonPromise = new Promise((resolve, reject) => {
+            reader.onload = () => {
+                try {
+                    const jsonData = JSON.parse(reader.result);
+                    resolve(jsonData);
+                } catch (error) {
+                    reject(error);
+                }
+            };
+        });
+
         reader.readAsText(file);
+
+        try {
+            const jsonData = await parseJsonPromise;
+            labelsImages = jsonData;
+        } catch (error) {
+            console.error("Error parsing JSON:", error);
+        }
     });
 });
 
