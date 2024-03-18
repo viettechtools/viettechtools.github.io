@@ -12,12 +12,18 @@
 
 <body>
   <div id="container">
-    <div id="sidebar">
-      <h2>Images</h2>
-      <ul id="list-images"></ul>
+    <div class="sidebar-container">
+      <div id="sidebar">
+        <h2>Images</h2>
+        <ul id="list-images"></ul>
+      </div>
       <button id="btn-load-image">Load images</button>
       <button id="load-json-button">Load JSON</button>
       <button id="save-json-button">Save File</button>
+      <div id="sidebar-right">
+        <h2>Labels</h2>
+        <ul id="label-list"></ul>
+      </div>
     </div>
     <div id="main-content">
       <h6 id="name-image"></h6>
@@ -26,10 +32,7 @@
         <pre id="json-data"></pre>
       </div>
     </div>
-    <div id="sidebar-right">
-      <h2>Labels</h2>
-      <ul id="label-list"></ul>
-    </div>
+    
   </div>
   <script src="script.js"></script>
 </body>

@@ -3,7 +3,7 @@ body {
   margin: 20px;
 }
 
-h6{
+h6 {
   margin: 0;
   font-size: 12px;
 }
@@ -11,10 +11,10 @@ h6{
 li {
   list-style-type: none;
 }
-.li_image{
+.li_image {
   margin: 5px 0px;
 }
-.li_image:hover{
+.li_image:hover {
   cursor: pointer;
   background-color: #ccc;
 }
@@ -30,8 +30,13 @@ li {
   display: flex;
 }
 
+.sidebar-container {
+  width: 350px;
+  margin-right: 30px;
+}
+
 #sidebar {
-  width: 300px;
+  width: 100%;
   border: 1px solid #ccc;
   padding: 10px;
 
@@ -58,38 +63,27 @@ li {
 }
 
 #btn-load-image {
-  margin-top: 10px;
   padding: 5px 5px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   border: 1px solid #ccc;
-  position: absolute;
-  bottom: 5px;
-  left: 5px;
+  margin: 10px 0;
+  margin-right: 5px;
 }
 
 #load-json-button {
-  margin-top: 10px;
   margin: 0 5px;
   padding: 5px 5px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   border: 1px solid #ccc;
-  position: absolute;
-  bottom: 5px;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 #save-json-button {
-  margin-top: 10px;
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 14px;
   cursor: pointer;
   border: 1px solid #ccc;
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
 }
 
 #main-content {
@@ -107,7 +101,7 @@ li {
 
 .image-viewer {
   max-width: 100%;
-  max-height: 300px;
+  max-height: 500px;
 }
 
 #save-button {
@@ -120,10 +114,11 @@ li {
 }
 
 #sidebar-right {
+  margin-top: 10px;
   border: 1px solid #ccc;
   padding: 10px;
 
-  width: 370px;
+  width: 100%;
   max-height: 600px;
   min-height: 600px;
   overflow-y: auto;
