@@ -13,6 +13,9 @@ const labelList = document.getElementById('label-list');
 
 // Cấu trúc dữ liệu label
 const LABELS = {
+    "texture_and_color": [
+        "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective","Others",
+    ],
     "top": {
         "top-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie","others",],
         "top-body": {
