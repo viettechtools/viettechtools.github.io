@@ -13,35 +13,38 @@ const labelList = document.getElementById('label-list');
 
 // Cấu trúc dữ liệu label
 const LABELS = {
+    "texture_and_color": [
+        "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",
+    ],
     "top": {
-        "top-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie",],
+        "top-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie", "others",],
         "top-body": {
-            "zipper/button": ["symmetry", "asymmetry",],
-            "length": ["chest", "belly", "normal", "long",],
-            "fit": ["fit", "loose", "puff",],
-            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",]
+            "zipper/button": ["symmetry", "asymmetry", "others",],
+            "length": ["chest", "belly", "normal", "long", "others",],
+            "fit": ["fit", "regular", "loose", "puff", "others",],
+            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
         },
         "sleeve": {
-            "length": ["long", "short", "sleeveless"],
-            "fit": ["tight", "puff", "loose", "upper loose",],
-            "style": ["1-sleeve", "layer", "flowery", "pin ending",]
+            "length": ["long", "short", "sleeveless", "others",],
+            "fit": ["tight", "regular", "puff", "loose", "upper loose", "others",],
+            "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
         },
         "accessories": ["bow", "ruffle", "band", "belt", "others",],
     },
     "bottom": {
         "skirt": {
             "bottom-body": {
-                "length": ["long", "short", "sleeveless"],
-                "fit": ["tight", "puff", "loose", "upper loose",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "fit": ["tight", "regular", "puff", "loose", "upper loose", "others",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "pant": {
             "leg": {
-                "length": ["long", "short",],
-                "fit": ["tight", "puff", "loose", "upper loose",],
-                "style": ["layer", "flowery", "pin ending",]
+                "length": ["long", "knee", "mini", "others",],
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "others",],
+                "style": ["layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -49,57 +52,56 @@ const LABELS = {
     },
     "whole-body": {
         "dress/long coat": {
-            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "bustier",],
+            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "others",],
             "whole-body-body": {
-                "zipper/button": ["symmetry", "asymmetry",],
-                "length": ["mini", "middle", "long",],
-                "fit": ["fit", "loose", "puff",],
-                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending",]
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["mini", "knee", "long", "others",],
+                "fit": ["fit", "regular", "loose", "puff", "others",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
             },
             "sleeve": {
-                "length": ["long", "short", "sleeveless"],
-                "fit": ["tight", "puff", "loose", "upper loose",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "fit": ["tight", "regular", "puff", "loose", "upper loose", "others",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
-            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie",],
+            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie", "others",],
             "jumpsuit-body": {
-                "zipper/button": ["symmetry", "asymmetry",],
-                "length": ["chest",],
-                "fit": ["fit", "loose", "puff",],
-                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "flowery", "pin", "pin-ending",]
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["chest", "others",],
+                "fit": ["fit", "regular", "loose", "puff", "others",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
             },
             "sleeve": {
-                "length": ["long", "short", "sleeveless"],
-                "fit": ["tight", "puff", "loose", "upper loose",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "others",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "leg": {
-                "length": ["long", "short",],
-                "fit": ["tight", "puff", "loose", "upper loose",],
-                "style": ["layer", "flowery", "pin ending",]
+                "length": ["long", "short", "mini", "others",],
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "others",],
+                "style": ["layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
-            "swimwear-neck": ["Collar",
-                "tuttle", "round", "v-shape", "bustier"],
+            "swimwear-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "others",],
             "swimwear-body": {
-                "zipper/button": ["symmetry", "asymmetry",],
-                "length": ["chest",],
-                "fit": ["fit",],
-                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer",]
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["chest", "others",],
+                "fit": ["fit", "others",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "others",]
             },
             "sleeve": {
-                "length": ["long", "short", "sleeveless"],
-                "style": ["1-sleeve",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "style": ["1-sleeve", "others",]
             },
             "leg": {
-                "length": ["long", "short",],
-                "fit": ["tight",],
-                "style": ["layer",]
+                "length": ["long", "short", "mini", "others",],
+                "fit": ["tight", "others",],
+                "style": ["layer", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         }
@@ -144,7 +146,7 @@ btnLoadImage.addEventListener('click', () => {
                 labels: {},
             }
         }
-        console.log(labelsImages)
+        console.log("Check default json: ", labelsImages)
     });
 });
 
@@ -291,11 +293,11 @@ const CheckedCheckboxImage = () => {
     }
 }
 const CheckedChildCheckboxImage = (listLabels, parent, labelsChecked, keyParent) => {
+    if (labelsChecked === undefined) {
+        return
+    }
     for (const label in listLabels) {
-        // console.log(labelsChecked)
-        // console.log(label)
-        // console.log(labelsChecked[label])
-        if (labelsChecked === undefined || isEmpty(labelsChecked[label]) || labelsChecked[label] === undefined || labelsChecked[label].length === 0) {
+        if (isEmpty(labelsChecked[label]) || labelsChecked[label].length === 0) {
             continue
         }
         const checkbox = document.querySelector(`li[name="${keyParent}_${label}"].label_1`);
@@ -303,7 +305,7 @@ const CheckedChildCheckboxImage = (listLabels, parent, labelsChecked, keyParent)
             for (const idx in labelsChecked[label]) {
                 const child = labelsChecked[label][idx]
                 const childBox = checkbox.querySelector(`input[name="${keyParent}_${label}_${child}"].label_2`)
-                if (labelsChecked[label].includes(child)) {
+                if (childBox != undefined && labelsChecked[label].includes(child)) {
                     childBox.checked = true
                 }
             }
@@ -432,6 +434,7 @@ loadJsonButton.addEventListener('click', () => {
         try {
             const jsonData = await parseJsonPromise;
             labelsImages = jsonData;
+            console.log("Check load json: ", jsonData)
         } catch (error) {
             console.error("Error parsing JSON:", error);
         }
