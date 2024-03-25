@@ -44,7 +44,7 @@ const LABELS = {
             "leg": {
                 "length": ["long", "knee","mini","others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose","others",],
-                "style": ["layer", "flowery", "pin ending","others",]
+                "style": ["layer", "flowery", "pocket","pin ending","others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
