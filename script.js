@@ -17,15 +17,15 @@ const LABELS = {
         "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective","Others",
     ],
     "top": {
-        "top-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie","others",],
+        "top-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie","others",],
         "top-body": {
             "zipper/button": ["symmetry", "asymmetry","others",],
-            "length": ["chest", "belly", "normal", "long","others",],
+            "length": ["chest", "belly", "normal", "long", "others",],
             "fit": ["fit", "regular","loose", "puff","others",],
             "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending","others",]
         },
         "sleeve": {
-            "length": ["long", "short", "sleeveless","others",],
+            "length": ["long", "short", "sleeveless", "others",],
             "fit": ["tight", "regular", "puff", "loose", "upper loose","others",],
             "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
         },
@@ -52,7 +52,7 @@ const LABELS = {
     },
     "whole-body": {
         "dress/long coat": {
-            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "bustier","others",],
+            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier","others",],
             "whole-body-body": {
                 "zipper/button": ["symmetry", "asymmetry","others",],
                 "length": ["mini", "knee", "long","others",],
@@ -67,7 +67,7 @@ const LABELS = {
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
-            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "hoodie","others",],
+            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie","others",],
             "jumpsuit-body": {
                 "zipper/button": ["symmetry", "asymmetry","others",],
                 "length": ["chest","others",],
@@ -87,7 +87,7 @@ const LABELS = {
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
-            "swimwear-neck": ["Collar", "tuttle", "round", "v-shape", "bustier", "others",],
+            "swimwear-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "others",],
             "swimwear-body": {
                 "zipper/button": ["symmetry", "asymmetry","others",],
                 "length": ["chest","others",],
