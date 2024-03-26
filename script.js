@@ -34,7 +34,7 @@ const LABELS = {
     "bottom": {
         "skirt": {
             "bottom-body": {
-                "length": ["long", "short", "sleeveless", "others",],
+                "length": ["long", "knee", "mini", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose","others",],
                 "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
             },
@@ -42,7 +42,7 @@ const LABELS = {
         },
         "pant": {
             "leg": {
-                "length": ["long", "knee","mini","others",],
+                "length": ["long", "knee", "mini", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose","others",],
                 "style": ["layer", "flowery", "pocket","pin ending","others",]
             },
