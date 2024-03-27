@@ -132,6 +132,11 @@ btnLoadImage.addEventListener('click', () => {
                 if (imageGarmentViewer.getAttribute('src') !== "") {
                     GetListLabelsChecked();
                 }
+                const allLi = document.querySelectorAll('.li_image');
+                allLi.forEach(item => {
+                    item.classList.remove('active-li');
+                });
+                li.classList.add('active-li');
                 const readerGarment = new FileReader();
                 readerGarment.onload = () => {
                     imageGarmentViewer.src = readerGarment.result;
@@ -452,3 +457,35 @@ document.addEventListener("DOMContentLoaded", function () {
         HandleShortedListLabels()
     }, 1000)
 });
+
+// Hàm xử lý khi phím mũi tên được nhấn
+function handleArrowKeyPress(event) {
+    event.preventDefault();
+    const activeLi = document.querySelector('.active-li');
+    let nextLi;
+
+    // Nếu không có phần tử nào được chọn hoặc không phải phím mũi tên lên hoặc xuống, thoát khỏi hàm
+    if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
+        return
+    } else {
+        if (!activeLi) {
+            nextLi = document.querySelector('.li_image');
+        }
+        else if (event.key === 'ArrowUp') {
+            nextLi = activeLi.previousElementSibling;
+        } else if (event.key === 'ArrowDown') {
+            nextLi = activeLi.nextElementSibling;
+        }
+    }
+
+    const allLi = document.querySelectorAll('.li_image');
+    allLi.forEach(item => {
+        item.classList.remove('active-li');
+    });
+
+    nextLi.classList.add('active-li');
+    nextLi.click()
+}
+
+// Lắng nghe sự kiện khi phím được nhấn
+document.addEventListener('keydown', handleArrowKeyPress);

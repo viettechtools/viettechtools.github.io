@@ -18,6 +18,10 @@ li {
   cursor: pointer;
   background-color: #ccc;
 }
+.active-li {
+  background: antiquewhite;
+  padding: 5px;
+}
 
 .parentLabel {
   display: flex;
