@@ -36,9 +36,9 @@ const LABELS = {
             "bottom-body": {
                 "length": ["long", "knee", "mini", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose","lower loose","others",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
+                "style": ["layer", "flowery", "pin ending","others",]
             },
-            "accessories": ["bow", "ruffle", "band", "belt", "others",],
+            "accessories": ["bow", "pocket", "ruffle", "band", "belt", "others",],
         },
         "pant": {
             "leg": {
