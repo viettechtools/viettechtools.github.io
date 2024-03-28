@@ -4,6 +4,7 @@ const btnLoadImage = document.getElementById('btn-load-image');
 const loadJsonButton = document.getElementById('load-json-button');
 const saveJsonButton = document.getElementById('save-json-button');
 const nameImage = document.getElementById('name-image');
+const nameImageJson = document.getElementById('name-image-json');
 const imageGarmentViewer = document.getElementById('image-garment');
 let labelsImages = {}
 let listGarmentImages = []
@@ -398,10 +399,15 @@ const HandleChooseImage = () => {
     const jsonData = JSON.stringify(listCheckboxChecked, null, 2);
     document.getElementById('json-data').innerHTML = jsonData;
     hljs.highlightElement(document.getElementById('json-data'));
+    console.log(nameImageJson)
+    nameImageJson.innerText = nameImage.innerText;
 }
 
 // TODO: HANDLE BUTTON_JSON(load, save)
 saveJsonButton.addEventListener('click', () => {
+    if (imageGarmentViewer.getAttribute('src') !== "") {
+        GetListLabelsChecked();
+    }
     console.log(labelsImages)
     const jsonString = JSON.stringify(labelsImages, null, 2);
 
@@ -460,7 +466,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Hàm xử lý khi phím mũi tên được nhấn
 function handleArrowKeyPress(event) {
-    event.preventDefault();
     const activeLi = document.querySelector('.active-li');
     let nextLi;
 
@@ -468,6 +473,7 @@ function handleArrowKeyPress(event) {
     if (event.key !== 'ArrowUp' && event.key !== 'ArrowDown') {
         return
     } else {
+        event.preventDefault();
         if (!activeLi) {
             nextLi = document.querySelector('.li_image');
         }
@@ -486,6 +492,4 @@ function handleArrowKeyPress(event) {
     nextLi.classList.add('active-li');
     nextLi.click()
 }
-
-// Lắng nghe sự kiện khi phím được nhấn
 document.addEventListener('keydown', handleArrowKeyPress);
