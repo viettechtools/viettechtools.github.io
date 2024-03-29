@@ -46,7 +46,7 @@ const LABELS = {
             "leg": {
                 "length": ["long", "knee", "mini", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pocket", "pin ending", "others",]
+                "style": ["layer", "flowery", "pocket", "flare ending", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -65,7 +65,7 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-                "style": ["1-sleeve", "layer", "flowery", "flare ending", "pin ending", "others",]
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -74,8 +74,7 @@ const LABELS = {
             "jumpsuit-body": {
                 "zipper/button": ["symmetry", "asymmetry", "others",],
                 "length": ["chest", "others",],
-                "fit_upper": ["fit", "regular", "loose", "puff", "others",],
-                "fit_lower": ["fit", "regular", "loose", "puff", "others",],
+                "fit": ["fit", "regular", "loose", "puff", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
             },
             "sleeve": {
@@ -86,7 +85,7 @@ const LABELS = {
             "leg": {
                 "length": ["long", "short", "mini", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pin ending", "others",]
+                "style": ["layer", "flowery", "pin ending", "flare ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
