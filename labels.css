@@ -147,3 +147,20 @@ li {
   height: 320px;
   overflow-y: auto;
 }
+
+.zoom-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#zoom-in {
+  right: 10px;
+}
+#zoom-out {
+  right: 50px;
+}
+
+#name-image {
+  font-size: 20px;
+  padding: 10px 0;
+}

@@ -8,6 +8,7 @@ const nameImageJson = document.getElementById('name-image-json');
 const imageGarmentViewer = document.getElementById('image-garment');
 let labelsImages = {}
 let listGarmentImages = []
+let maxWidthDefault = "100%", maxHeightDefault = "500px"
 
 // Tạo danh sách label
 const labelList = document.getElementById('label-list');
@@ -15,20 +16,20 @@ const labelList = document.getElementById('label-list');
 // Cấu trúc dữ liệu label
 const LABELS = {
     "texture_and_color": [
-        "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective","Others",
+        "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",
     ],
     "top": {
-        "top-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie","others",],
+        "top-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
         "top-body": {
-            "zipper/button": ["symmetry", "asymmetry","others",],
+            "zipper/button": ["symmetry", "asymmetry", "others",],
             "length": ["chest", "belly", "normal", "long", "others",],
-            "fit": ["fit", "regular","loose", "puff","others",],
-            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending","others",]
+            "fit": ["fit", "regular", "loose", "puff", "others",],
+            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
         },
         "sleeve": {
             "length": ["long", "short", "sleeveless", "others",],
-            "fit": ["tight", "regular", "puff", "loose", "upper loose","lower loose","others",],
-            "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
+            "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
+            "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
         },
         "accessories": ["bow", "ruffle", "band", "belt", "others",],
     },
@@ -36,16 +37,16 @@ const LABELS = {
         "skirt": {
             "bottom-body": {
                 "length": ["long", "knee", "mini", "others",],
-                "fit": ["tight", "regular", "puff", "loose", "upper loose","lower loose","others",],
-                "style": ["layer", "flowery", "pin ending","others",]
+                "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
+                "style": ["layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "pocket", "ruffle", "band", "belt", "others",],
         },
         "pant": {
             "leg": {
                 "length": ["long", "knee", "mini", "others",],
-                "fit": ["tight", "regular", "loose", "puff", "upper loose","lower loose","others",],
-                "style": ["layer", "flowery", "pocket","pin ending","others",]
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
+                "style": ["layer", "flowery", "pocket", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -53,58 +54,58 @@ const LABELS = {
     },
     "whole-body": {
         "dress/long coat": {
-            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier","others",],
+            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "others",],
             "whole-body-body": {
-                "zipper/button": ["symmetry", "asymmetry","others",],
-                "length": ["mini", "knee", "long","others",],
-                "fit_upper": ["fit", "regular","loose", "puff","others",],
-                "fit_lower": ["fit", "regular","loose", "puff","others",],
-                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending","others",]
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["mini", "knee", "long", "others",],
+                "fit_upper": ["fit", "regular", "loose", "puff", "others",],
+                "fit_lower": ["fit", "regular", "loose", "puff", "others",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
             },
             "sleeve": {
-                "length": ["long", "short", "sleeveless","others",],
-                "fit": ["tight", "regular", "puff", "loose", "upper loose","lower loose","others",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
-            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie","others",],
+            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
             "jumpsuit-body": {
-                "zipper/button": ["symmetry", "asymmetry","others",],
-                "length": ["chest","others",],     
-                "fit_upper": ["fit", "regular","loose", "puff","others",],
-                "fit_lower": ["fit", "regular","loose", "puff","others",],
-                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending","others",]
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["chest", "others",],
+                "fit_upper": ["fit", "regular", "loose", "puff", "others",],
+                "fit_lower": ["fit", "regular", "loose", "puff", "others",],
+                "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
             },
             "sleeve": {
-                "length": ["long", "short", "sleeveless","others",],
-                "fit": ["tight", "regular", "loose", "puff", "upper loose","lower loose", "others",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending","others",]
+                "length": ["long", "short", "sleeveless", "others",],
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
+                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
             },
             "leg": {
-                "length": ["long", "short","mini", "others",],
-                "fit": ["tight", "regular", "loose", "puff", "upper loose","lower loose", "others",],
-                "style": ["layer", "flowery", "pin ending","others",]
+                "length": ["long", "short", "mini", "others",],
+                "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
+                "style": ["layer", "flowery", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
             "swimwear-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "others",],
             "swimwear-body": {
-                "zipper/button": ["symmetry", "asymmetry","others",],
-                "length": ["chest","others",],
-                "fit": ["fit","others",],
+                "zipper/button": ["symmetry", "asymmetry", "others",],
+                "length": ["chest", "others",],
+                "fit": ["fit", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "others",]
             },
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
-                "style": ["1-sleeve","others",]
+                "style": ["1-sleeve", "others",]
             },
             "leg": {
-                "length": ["long", "short","mini", "others",],
-                "fit": ["tight","others",],
-                "style": ["layer","others",]
+                "length": ["long", "short", "mini", "others",],
+                "fit": ["tight", "others",],
+                "style": ["layer", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         }
@@ -396,6 +397,9 @@ const HandleChooseImage = () => {
     ResetChecked();
     CheckedCheckboxImage();
 
+    imageGarmentViewer.style.maxWidth = maxWidthDefault
+    imageGarmentViewer.style.maxHeight = maxHeightDefault
+
     // TODO: Show json 
     const listCheckboxChecked = GetCheckedLabels();
     const jsonData = JSON.stringify(listCheckboxChecked, null, 2);
@@ -466,7 +470,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 1000)
 });
 
-// Hàm xử lý khi phím mũi tên được nhấn
+
+// TODO: USE KEY TO CHOOSE IMAGES
 function handleArrowKeyPress(event) {
     const activeLi = document.querySelector('.active-li');
     let nextLi;
@@ -495,3 +500,43 @@ function handleArrowKeyPress(event) {
     nextLi.click()
 }
 document.addEventListener('keydown', handleArrowKeyPress);
+
+// TODO: ZOOM IMAGES
+document.addEventListener('DOMContentLoaded', function () {
+    var zoomInButton = document.getElementById('zoom-in');
+    var zoomOutButton = document.getElementById('zoom-out');
+    var zoomAmount = 0.1; // Tăng/giảm 10% mỗi lần click
+    var currentZoomCount = 0;
+
+    zoomInButton.addEventListener('click', function () {
+        if (imageGarmentViewer.getAttribute('src') === "") {
+            return
+        }
+        if (currentZoomCount < 10) {
+            zoomImage(1);
+            currentZoomCount++;
+        }
+    });
+
+    zoomOutButton.addEventListener('click', function () {
+        if (imageGarmentViewer.getAttribute('src') === "") {
+            return
+        }
+        if (currentZoomCount > 0) {
+            zoomImage(-1);
+            currentZoomCount--;
+        }
+    });
+
+    function zoomImage(direction) {
+        var currentWidth = imageGarmentViewer.offsetWidth;
+        var originalWidth = imageGarmentViewer.naturalWidth;
+        var newWidth = currentWidth + (originalWidth * zoomAmount * direction);
+
+        var aspectRatio = originalWidth / imageGarmentViewer.naturalHeight;
+        var newHeight = newWidth / aspectRatio;
+
+        imageGarmentViewer.style.maxWidth = newWidth + 'px';
+        imageGarmentViewer.style.maxHeight = newHeight + 'px';
+    }
+});
