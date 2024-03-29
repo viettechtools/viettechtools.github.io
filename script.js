@@ -65,7 +65,7 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-                "style": ["1-sleeve", "layer", "flowery", "pin ending", "others",]
+                "style": ["1-sleeve", "layer", "flowery", "flare ending", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
