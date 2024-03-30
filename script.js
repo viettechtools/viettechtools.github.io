@@ -19,7 +19,7 @@ const LABELS = {
         "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",
     ],
     "top": {
-        "top-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
+        "top-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
         "top-body": {
             "zipper/button": ["symmetry", "asymmetry", "others",],
             "length": ["chest", "belly", "normal", "long", "others",],
@@ -54,7 +54,7 @@ const LABELS = {
     },
     "whole-body": {
         "dress/long coat": {
-            "dress/long coat-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "others",],
+            "dress/long coat-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "others",],
             "whole-body-body": {
                 "zipper/button": ["symmetry", "asymmetry", "others",],
                 "length": ["mini", "knee", "long", "others",],
@@ -70,7 +70,7 @@ const LABELS = {
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
-            "jumpsuit-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
+            "jumpsuit-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "hoodie", "others",],
             "jumpsuit-body": {
                 "zipper/button": ["symmetry", "asymmetry", "others",],
                 "length": ["chest", "others",],
@@ -90,7 +90,7 @@ const LABELS = {
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
-            "swimwear-neck": ["Collar", "tuttle", "round", "v-shape", "square", "bustier", "others",],
+            "swimwear-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "others",],
             "swimwear-body": {
                 "zipper/button": ["symmetry", "asymmetry", "others",],
                 "length": ["chest", "others",],
