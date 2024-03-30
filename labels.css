@@ -143,9 +143,12 @@ li {
 }
 
 #json-data {
-  width: 100%;
+  width: 1200px;
   height: 320px;
   overflow-y: auto;
+  background-color: #222222;
+  color: #f2f2f2;
+  font-size: 14px;
 }
 
 .zoom-button {
@@ -163,4 +166,69 @@ li {
 #name-image {
   font-size: 20px;
   padding: 10px 0;
+}
+#name-image-json {
+  font-size: 20px;
+  padding: 10px 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  background-color: #222; /* Đổi màu nền thành đen */
+  color: #fff; /* Đổi màu chữ thành trắng */
+}
+
+/* Các phần tử có background nền cần điều chỉnh */
+#sidebar,
+#sidebar-right,
+#todo-list li {
+  background-color: #333; /* Đổi màu nền thành màu đen nhẹ */
+  border-color: #444; /* Đổi màu viền */
+}
+
+/* Các phần tử hover */
+#todo-list li:hover,
+.li_image:hover,
+.toggle-icon:hover {
+  background-color: #555; /* Đổi màu nền khi hover */
+}
+
+/* Các phần tử active */
+.active-li {
+  background: #666; /* Đổi màu nền khi active */
+}
+
+/* Các phần tử chữ */
+h6,
+#name-image {
+  color: #ccc; /* Đổi màu chữ thành màu xám nhạt */
+}
+
+/* Các phần tử nút */
+#btn-load-image,
+#load-json-button,
+#save-json-button,
+#save-button,
+.zoom-button {
+  border-color: #ccc; /* Đổi màu viền nút */
+  color: #fff; /* Đổi màu chữ thành trắng */
+  background-color: #333;
+}
+
+.zoom-button:hover,
+#btn-load-image:hover,
+#load-json-button:hover,
+#save-json-button:hover,
+#save-button:hover {
+  background-color: #444; /* Đổi màu nền khi hover */
+}
+
+/* Thêm các hiệu ứng hover */
+#btn-load-image:hover,
+#load-json-button:hover,
+#save-json-button:hover,
+#save-button:hover,
+.zoom-button:hover {
+  cursor: pointer;
 }

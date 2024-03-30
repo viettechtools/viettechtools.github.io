@@ -402,7 +402,8 @@ const HandleChooseImage = () => {
 
     // TODO: Show json 
     const listCheckboxChecked = GetCheckedLabels();
-    const jsonData = JSON.stringify(listCheckboxChecked, null, 2);
+    let jsonData = JSON.stringify(listCheckboxChecked, null, 2);
+    jsonData = simplifyJSON(jsonData)
     document.getElementById('json-data').innerHTML = jsonData;
     hljs.highlightElement(document.getElementById('json-data'));
     console.log(nameImageJson)
@@ -540,3 +541,12 @@ document.addEventListener('DOMContentLoaded', function () {
         imageGarmentViewer.style.maxHeight = newHeight + 'px';
     }
 });
+
+function simplifyJSON(jsonString) {
+    const regex = /"(\w+)":\s*\[\s*([\s\S]*?)\s*\]/gs;
+    jsonString = jsonString.replace(regex, (match, p1, p2) => {
+        const items = p2.split('\n').map(item => item.trim()).filter(item => item.length > 0);
+        return `"${p1}": [${items.join('')}]`;
+    });
+    return jsonString;
+}
