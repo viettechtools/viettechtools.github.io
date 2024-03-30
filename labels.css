@@ -175,7 +175,7 @@ li {
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
-  background-color: #222; /* Đổi màu nền thành đen */
+  background-color: rgb(30, 30, 30); /* Đổi màu nền thành đen */
   color: #fff; /* Đổi màu chữ thành trắng */
 }
 
@@ -183,7 +183,7 @@ body {
 #sidebar,
 #sidebar-right,
 #todo-list li {
-  background-color: #333; /* Đổi màu nền thành màu đen nhẹ */
+  background-color: rgb(30, 30, 30); /* Đổi màu nền thành màu đen nhẹ */
   border-color: #444; /* Đổi màu viền */
 }
 
@@ -211,9 +211,9 @@ h6,
 #save-json-button,
 #save-button,
 .zoom-button {
-  border-color: #ccc; /* Đổi màu viền nút */
+  border-color: #7f7e7e; /* Đổi màu viền nút */
   color: #fff; /* Đổi màu chữ thành trắng */
-  background-color: #333;
+  background-color: rgb(30, 30, 30);
 }
 
 .zoom-button:hover,
