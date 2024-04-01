@@ -232,3 +232,26 @@ h6,
 .zoom-button:hover {
   cursor: pointer;
 }
+
+/* JSON BEAUTY */
+pre {
+  outline: 1px solid #ccc;
+  padding: 5px;
+  margin: 15px;
+  font-size: 16px;
+}
+.string {
+  color: rgb(226, 163, 78);
+}
+.number {
+  color: darkorange;
+}
+.boolean {
+  color: blue;
+}
+.null {
+  color: magenta;
+}
+.key {
+  color: rgb(22, 109, 173);
+}

@@ -403,9 +403,10 @@ const HandleChooseImage = () => {
     const listCheckboxChecked = GetCheckedLabels();
     let jsonData = JSON.stringify(listCheckboxChecked, null, 2);
     jsonData = simplifyJSON(jsonData)
-    document.getElementById('json-data').innerHTML = jsonData;
+    document.getElementById('json-data').innerHTML = syntaxHighlight(jsonData);
     hljs.highlightElement(document.getElementById('json-data'));
     console.log(nameImageJson)
+    console.log()
     nameImageJson.innerText = nameImage.innerText;
 }
 
@@ -548,4 +549,31 @@ function simplifyJSON(jsonString) {
         return `"${p1}": [${items.join('')}]`;
     });
     return jsonString;
+}
+
+function syntaxHighlight(json) {
+    if (!json) return ""; //no JSON from response
+
+    json = json
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+    return json.replace(
+        /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+        function (match) {
+            var cls = "number";
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = "key";
+                } else {
+                    cls = "string";
+                }
+            } else if (/true|false/.test(match)) {
+                cls = "boolean";
+            } else if (/null/.test(match)) {
+                cls = "null";
+            }
+            return '<span class="' + cls + '">' + match + "</span>";
+        }
+    );
 }
