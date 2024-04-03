@@ -435,40 +435,37 @@ loadJsonButton.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
+    input.multiple = true; // Cho phép chọn nhiều file
     input.click();
 
     input.addEventListener('change', async () => {
-        const file = input.files[0];
-        const reader = new FileReader();
-        const parseJsonPromise = new Promise((resolve, reject) => {
-            reader.onload = () => {
-                try {
-                    const jsonData = JSON.parse(reader.result);
-                    resolve(jsonData);
-                } catch (error) {
-                    reject(error);
-                }
-            };
-        });
+        const files = input.files;
 
-        reader.readAsText(file);
-
-        try {
-            const jsonData = await parseJsonPromise;
-            // Update the value of labelsImages[key].value
-            for (const key in jsonData) {
-                if (jsonData.hasOwnProperty(key)) {
-                    if (labelsImages.hasOwnProperty(key)) {
-                        labelsImages[key].labels = jsonData[key].labels;
-                    } else {
-                        labelsImages[key] = jsonData[key];
+        for (const file of files) {
+            const reader = new FileReader();
+            const parseJsonPromise = new Promise((resolve, reject) => {
+                reader.onload = () => {
+                    try {
+                        const jsonData = JSON.parse(reader.result);
+                        resolve(jsonData);
+                    } catch (error) {
+                        reject(error);
                     }
-                }
+                };
+            });
+
+            reader.readAsText(file);
+
+            try {
+                const jsonData = await parseJsonPromise;
+                Object.assign(labelsImages, jsonData);
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
             }
-            console.log("Check load json: ", jsonData);
-        } catch (error) {
-            console.error("Error parsing JSON:", error);
         }
+
+        // In ra object kết quả
+        console.log("Merged JSON:", labelsImages);
     });
 });
 
