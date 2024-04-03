@@ -409,6 +409,7 @@ const HandleChooseImage = () => {
     let jsonData = JSON.stringify(listCheckboxChecked, null, 2);
     jsonData = simplifyJSON(jsonData)
     document.getElementById('json-data').innerHTML = syntaxHighlight(jsonData);
+    nameImageJson.innerText = nameImage.innerText;
 }
 
 // TODO: HANDLE BUTTON_JSON(load, save)
