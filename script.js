@@ -361,8 +361,10 @@ const GetListLabelsChecked = () => {
         }
     });
     // getLabels[imageShowed] = attributes;
-    labelsImages[nameImage.innerText]["labels"] = labelsChecked
-    console.log(JSON.stringify(labelsChecked))
+    if (!isEmpty(labelsChecked)) {
+        labelsImages[nameImage.innerText]["labels"] = labelsChecked
+        console.log(JSON.stringify(labelsChecked))
+    }
 }
 const GetListChildLabelsChecked = (childLabel) => {
     const listLabels = childLabel.querySelectorAll('li.label_1');
@@ -453,8 +455,17 @@ loadJsonButton.addEventListener('click', () => {
 
         try {
             const jsonData = await parseJsonPromise;
-            labelsImages = jsonData;
-            console.log("Check load json: ", jsonData)
+            // Update the value of labelsImages[key].value
+            for (const key in jsonData) {
+                if (jsonData.hasOwnProperty(key)) {
+                    if (labelsImages.hasOwnProperty(key)) {
+                        labelsImages[key].labels = jsonData[key].labels;
+                    } else {
+                        labelsImages[key] = jsonData[key];
+                    }
+                }
+            }
+            console.log("Check load json: ", jsonData);
         } catch (error) {
             console.error("Error parsing JSON:", error);
         }
