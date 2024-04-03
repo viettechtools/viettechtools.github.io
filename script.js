@@ -122,7 +122,12 @@ btnLoadImage.addEventListener('click', () => {
     input.addEventListener('change', () => {
         listGarmentImages = []
         const files = input.files;
-        Array.from(files).filter(file => {
+
+        const filesArray = Array.from(files);
+        filesArray.sort((a, b) => {
+            return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+        });
+        filesArray.filter(file => {
             listGarmentImages.push(file)
         })
         for (let i = 0; i < listGarmentImages.length; i++) {
