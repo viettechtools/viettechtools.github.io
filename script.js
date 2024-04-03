@@ -548,12 +548,20 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function simplifyJSON(jsonString) {
-    const regex = /"(\w+)":\s*\[\s*([\s\S]*?)\s*\]/gs;
-    jsonString = jsonString.replace(regex, (match, p1, p2) => {
-        const items = p2.split('\n').map(item => item.trim()).filter(item => item.length > 0);
-        return `"${p1}": [${items.join('')}]`;
-    });
-    return jsonString;
+    const jsonObject = JSON.parse(jsonString);
+
+    function flattenArrays(obj) {
+        for (const key in obj) {
+            if (Array.isArray(obj[key])) {
+                obj[key] = obj[key].join(', ');
+            } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+                flattenArrays(obj[key]);
+            }
+        }
+    }
+
+    flattenArrays(jsonObject);
+    return JSON.stringify(jsonObject, null, 2);
 }
 
 function syntaxHighlight(json) {
