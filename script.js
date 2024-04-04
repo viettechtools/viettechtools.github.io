@@ -9,6 +9,7 @@ const imageGarmentViewer = document.getElementById('image-garment');
 let labelsImages = {}
 let listGarmentImages = []
 let maxWidthDefault = "100%", maxHeightDefault = "500px"
+let JUST_LOAD_JSON = false
 
 // Tạo danh sách label
 const labelList = document.getElementById('label-list');
@@ -361,10 +362,11 @@ const GetListLabelsChecked = () => {
         }
     });
     // getLabels[imageShowed] = attributes;
-    if (!isEmpty(labelsChecked)) {
+    if (!JUST_LOAD_JSON) {
         labelsImages[nameImage.innerText]["labels"] = labelsChecked
         console.log(JSON.stringify(labelsChecked))
     }
+    JUST_LOAD_JSON = false
 }
 const GetListChildLabelsChecked = (childLabel) => {
     const listLabels = childLabel.querySelectorAll('li.label_1');
@@ -465,6 +467,7 @@ loadJsonButton.addEventListener('click', () => {
         }
 
         // In ra object kết quả
+        JUST_LOAD_JSON = true
         console.log("Merged JSON:", labelsImages);
     });
 });
