@@ -58,7 +58,7 @@ const LABELS = {
             "dress/long coat-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "offshoulder", "offshoulder-no-sleeve", "others",],
             "whole-body-body": {
                 "zipper/button": ["symmetry", "asymmetry", "others",],
-                "length": ["mini", "knee", "long", "others",],
+                "length": ["chest", "mini", "knee", "long", "others",],
                 "fit_upper": ["fit", "regular", "loose", "puff", "others",],
                 "fit_lower": ["fit", "regular", "loose", "puff", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
