@@ -22,7 +22,7 @@ const LABELS = {
     "top": {
         "top-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
         "top-body": {
-            "zipper/button": ["symmetry", "asymmetry", "others","none",],
+            "zipper/button": ["symmetry", "asymmetry", "none",],
             "length": ["chest", "belly", "normal", "long", "others",],
             "fit": ["fit", "regular", "loose", "puff", "others",],
             "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
@@ -57,7 +57,7 @@ const LABELS = {
         "dress/long coat": {
             "dress/long coat-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "offshoulder", "offshoulder-no-sleeve", "others",],
             "whole-body-body": {
-                "zipper/button": ["symmetry", "asymmetry", "others","none",],
+                "zipper/button": ["symmetry", "asymmetry","none",],
                 "length": ["chest", "mini", "knee", "long", "others",],
                 "fit_upper": ["fit", "regular", "loose", "puff", "others",],
                 "fit_lower": ["fit", "regular", "loose", "puff", "others",],
@@ -73,7 +73,7 @@ const LABELS = {
         "jumpsuit": {
             "jumpsuit-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
             "jumpsuit-body": {
-                "zipper/button": ["symmetry", "asymmetry", "others","none",],
+                "zipper/button": ["symmetry", "asymmetry","none",],
                 "length": ["chest", "others",],
                 "fit": ["fit", "regular", "loose", "puff", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
@@ -93,7 +93,7 @@ const LABELS = {
         "one-piece swimwear": {
             "swimwear-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "others",],
             "swimwear-body": {
-                "zipper/button": ["symmetry", "asymmetry", "others","none",],
+                "zipper/button": ["symmetry", "asymmetry","none",],
                 "length": ["chest", "others",],
                 "fit": ["fit", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "others",]
