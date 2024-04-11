@@ -91,7 +91,7 @@ const LABELS = {
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
-            "swimwear-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "others",],
+            "swimwear-neck": ["collar", "turtle", "round", "v-shape", "square", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
             "swimwear-body": {
                 "zipper/button": ["symmetry", "asymmetry","none",],
                 "length": ["chest", "others",],
@@ -112,7 +112,7 @@ const LABELS = {
 btnLoadImage.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.multiple = true;;
+    input.multiple = true;
     input.click();
 
     input.addEventListener('change', () => {
