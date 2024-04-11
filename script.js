@@ -112,7 +112,7 @@ const LABELS = {
 btnLoadImage.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
-    input.multiple = true;
+    input.multiple = true;;
     input.click();
 
     input.addEventListener('change', () => {
