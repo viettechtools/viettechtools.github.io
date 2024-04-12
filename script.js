@@ -25,7 +25,7 @@ const LABELS = {
             "zipper/button": ["symmetry", "asymmetry", "none",],
             "length": ["chest", "belly", "normal", "long",],
             "fit": ["fit", "regular", "loose", "puff", "others",],
-            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
+            "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "asymmetry", "others",]
         },
         "sleeve": {
             "length": ["long", "short", "sleeveless", "others",],
@@ -40,7 +40,7 @@ const LABELS = {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["long", "knee", "mini",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-                "style": ["layer", "lower-wire", "flowery", "pocket", "pin", "pin ending", "asymmetry", "others",]
+                "style": ["layer", "lower-wire", "flowery", "cut-out", "pocket", "pin", "pin ending", "asymmetry", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -49,7 +49,7 @@ const LABELS = {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["extra-long", "long", "knee", "mini",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pocket", "flare ending", "pin ending", "band ending", "others",]
+                "style": ["layer", "flowery", "pocket", "cut-out", "flare ending", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
