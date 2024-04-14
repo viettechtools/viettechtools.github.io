@@ -521,7 +521,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var zoomAmount = 0.1; // Tăng/giảm 10% mỗi lần click
 
     zoomInButton.addEventListener('click', function () {
-        console.log("Zoom in ", currentZoomCount)
         if (imageGarmentViewer.getAttribute('src') === "") {
             return
         }
@@ -532,7 +531,6 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     zoomOutButton.addEventListener('click', function () {
-        console.log("Zoom out ", currentZoomCount)
         if (imageGarmentViewer.getAttribute('src') === "") {
             return
         }
