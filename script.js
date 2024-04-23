@@ -50,7 +50,7 @@ const LABELS = {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["extra-long", "long", "knee", "mini",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pocket", "cut-out", "flare ending", "pin ending", "others",]
+                "style": ["layer", "flowery", "pocket", "cut-out", "flare ending", "pin", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
