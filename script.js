@@ -31,7 +31,7 @@ const LABELS = {
         "sleeve": {
             "length": ["long", "short", "sleeveless", "others",],
             "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-            "style": ["1-shoulder", "layer", "flowery", "pin ending", "band ending", "others",]
+            "style": ["1-shoulder", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
         },
         "accessories": ["bow", "ruffle", "band", "belt", "others",],
     },
@@ -69,7 +69,7 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-                "style": ["1-shoulder", "cut out", "layer", "flowery", "pin ending", "band ending", "others",]
+                "style": ["1-shoulder", "cut out", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -84,12 +84,12 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["1-shoulder", "layer", "flowery", "pin ending", "band ending", "others",]
+                "style": ["1-shoulder", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
             },
             "leg": {
                 "length": ["extra-long", "long", "short", "mini", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pin ending", "flare ending", "pocket", "others",]
+                "style": ["layer", "flowery", "pin", "pin ending", "flare ending", "pocket", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
