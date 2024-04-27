@@ -38,7 +38,7 @@ const LABELS = {
         "skirt": {
             "bottom-body": {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
-                "length": ["long", "knee", "mini",],
+                "length": ["extra-long", "long", "knee", "mini",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
                 "style": ["layer", "lower-wire", "flowery", "cut-out", "pocket", "pin", "pin ending", "asymmetry", "others",]
             },
