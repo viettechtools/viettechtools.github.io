@@ -10,6 +10,7 @@ let labelsImages = {}
 let listGarmentImages = []
 let maxWidthDefault = "100%", maxHeightDefault = "500px"
 let JUST_LOAD_JSON = false
+var currentZoomCount = 5;
 
 // Tạo danh sách label
 const labelList = document.getElementById('label-list');
@@ -30,7 +31,7 @@ const LABELS = {
         "sleeve": {
             "length": ["long", "short", "sleeveless", "others",],
             "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-            "style": ["1-shoulder", "layer", "flowery", "pin ending", "band ending", "others",]
+            "style": ["1-shoulder", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
         },
         "accessories": ["bow", "ruffle", "band", "belt", "others",],
     },
@@ -38,7 +39,7 @@ const LABELS = {
         "skirt": {
             "bottom-body": {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
-                "length": ["extra-long", "long", "knee", "mini",],
+                "length": ["long", "knee", "mini",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
                 "style": ["layer", "lower-wire", "flowery", "cut-out", "pocket", "pin", "pin ending", "asymmetry", "others",]
             },
@@ -49,7 +50,7 @@ const LABELS = {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["extra-long", "long", "knee", "mini",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pocket", "cut-out", "flare ending", "pin ending", "others",]
+                "style": ["layer", "flowery", "pocket", "cut-out", "flare ending", "pin", "pin ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
@@ -59,8 +60,8 @@ const LABELS = {
         "dress/long coat": {
             "dress/long coat-neck": ["collar", "turtle", "round", "v-shape", "square", "plunging", "bustier", "offshoulder", "offshoulder-no-sleeve", "others",],
             "whole-body-body": {
-                "zipper/button": ["symmetry", "asymmetry","none",],
-                "length": ["chest", "mini", "knee", "long", "extra-long","others",],
+                "zipper/button": ["symmetry", "asymmetry", "none",],
+                "length": ["chest", "mini", "knee", "long", "extra-long", "others",],
                 "fit_upper": ["fit", "regular", "loose", "puff", "others",],
                 "fit_lower": ["fit", "regular", "loose", "puff", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "asymmetry", "others",]
@@ -68,14 +69,14 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
-                "style": ["1-shoulder", "cut out", "layer", "flowery", "pin ending", "band ending", "others",]
+                "style": ["1-shoulder", "cut out", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "jumpsuit": {
             "jumpsuit-neck": ["collar", "turtle", "round", "v-shape", "square", "plunging", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
             "jumpsuit-body": {
-                "zipper/button": ["symmetry", "asymmetry","none",],
+                "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["chest", "others",],
                 "fit": ["fit", "regular", "loose", "puff", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "pin", "pin-ending", "others",]
@@ -83,19 +84,19 @@ const LABELS = {
             "sleeve": {
                 "length": ["long", "short", "sleeveless", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["1-shoulder", "layer", "flowery", "pin ending", "band ending", "others",]
+                "style": ["1-shoulder", "layer", "flowery", "pin", "pin ending", "band ending", "others",]
             },
             "leg": {
-                "length": ["extra-long","long", "short", "mini", "others",],
+                "length": ["extra-long", "long", "short", "mini", "others",],
                 "fit": ["tight", "regular", "loose", "puff", "upper loose", "lower loose", "others",],
-                "style": ["layer", "flowery", "pin ending", "flare ending", "pocket", "others",]
+                "style": ["layer", "flowery", "pin", "pin ending", "flare ending", "pocket", "others",]
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
         "one-piece swimwear": {
             "swimwear-neck": ["collar", "turtle", "round", "v-shape", "square", "plunging", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
             "swimwear-body": {
-                "zipper/button": ["symmetry", "asymmetry","none",],
+                "zipper/button": ["symmetry", "asymmetry", "none",],
                 "length": ["chest", "others",],
                 "fit": ["fit", "others",],
                 "style": ["Upper wire", "lower-wire", "flowery", "cut-out", "pocket", "layer", "others",]
@@ -404,6 +405,7 @@ const HandleChooseImage = () => {
 
     imageGarmentViewer.style.maxWidth = maxWidthDefault
     imageGarmentViewer.style.maxHeight = maxHeightDefault
+    currentZoomCount = 5;
 
     // TODO: Show json 
     const listCheckboxChecked = GetCheckedLabels();
@@ -517,7 +519,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var zoomInButton = document.getElementById('zoom-in');
     var zoomOutButton = document.getElementById('zoom-out');
     var zoomAmount = 0.1; // Tăng/giảm 10% mỗi lần click
-    var currentZoomCount = 0;
 
     zoomInButton.addEventListener('click', function () {
         if (imageGarmentViewer.getAttribute('src') === "") {
