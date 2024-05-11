@@ -39,7 +39,7 @@ const LABELS = {
         "skirt": {
             "bottom-body": {
                 "zipper/button": ["symmetry", "asymmetry", "none",],
-                "length": ["extra-long","long", "knee", "mini",],
+                "length": ["extra-long", "long", "knee", "mini",],
                 "fit": ["tight", "regular", "puff", "loose", "upper loose", "lower loose", "others",],
                 "style": ["layer", "lower-wire", "flowery", "cut-out", "pocket", "pin", "pin ending", "asymmetry", "others",]
             },
@@ -364,6 +364,10 @@ const GetListLabelsChecked = () => {
         labelsImages[nameImage.innerText]["labels"] = labelsChecked
         console.log(JSON.stringify(labelsChecked))
     }
+    else if (!compareJson(labelsImages[nameImage.innerText]["labels"], labelsChecked)) {
+        labelsImages[nameImage.innerText]["labels"] = labelsChecked
+        console.log(JSON.stringify(labelsChecked))
+    }
     JUST_LOAD_JSON = false
 }
 const GetListChildLabelsChecked = (childLabel) => {
@@ -595,4 +599,25 @@ function syntaxHighlight(json) {
             return '<span class="' + cls + '">' + match + "</span>";
         }
     );
+}
+
+// UNIT FUNCTION
+function compareJson(obj1, obj2) {
+
+    if (typeof obj1 !== typeof obj2) return false;
+
+    if (typeof obj1 === 'object' && obj1 !== null && obj2 !== null) {
+        const keys1 = Object.keys(obj1);
+        const keys2 = Object.keys(obj2);
+
+        if (keys1.length !== keys2.length) return false;
+
+        for (let key of keys1) {
+            if (!compareJson(obj1[key], obj2[key])) return false;
+        }
+
+        return true;
+    } else {
+        return obj1 === obj2;
+    }
 }
