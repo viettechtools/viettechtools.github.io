@@ -11,6 +11,20 @@ let listGarmentImages = []
 let maxWidthDefault = "100%", maxHeightDefault = "500px"
 let JUST_LOAD_JSON = false
 var currentZoomCount = 5;
+let isUpdateJson = false;
+
+window.addEventListener('beforeunload', function (e) {
+    if (isUpdateJson) {
+        var message = 'Bạn có chắc chắn muốn rời khỏi trang này?';
+        e.preventDefault();
+        e.returnValue = message;
+        return message;
+    }
+    var message = 'Bạn có chắc chắn muốn rời khỏi trang này?';
+    e.preventDefault();
+    e.returnValue = message;
+    return message;
+});
 
 // Tạo danh sách label
 const labelList = document.getElementById('label-list');
@@ -406,6 +420,7 @@ const HandleChooseImage = () => {
     HandleShortedListLabels();
     ResetChecked();
     CheckedCheckboxImage();
+    isUpdateJson = true;
 
     imageGarmentViewer.style.maxWidth = maxWidthDefault
     imageGarmentViewer.style.maxHeight = maxHeightDefault
