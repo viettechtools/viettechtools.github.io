@@ -455,6 +455,7 @@ saveJsonButton.addEventListener('click', () => {
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
+    localStorage.removeItem(nameFileDefault);
 });
 loadJsonButton.addEventListener('click', () => {
     const input = document.createElement('input');
@@ -692,7 +693,7 @@ function autoDownloadJsonFromLocalStorage(jsonFileName) {
         
         const link = document.createElement('a');
         link.href = url;
-        link.download = `label.json`; 
+        link.download = `labels.json`; 
         
         link.click();
         
