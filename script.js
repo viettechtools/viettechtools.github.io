@@ -580,10 +580,10 @@ document.addEventListener('DOMContentLoaded', function () {
     document.addEventListener('keydown', function (event) {
         if (imageGarmentViewer.getAttribute('src') === "") return;
     
-        if (event.key === 'ArrowRight' && currentZoomCount < 10) {
+        if (event.key === 'ArrowLeft' && currentZoomCount < 10) {
             zoomImage(1);
             currentZoomCount++;
-        } else if (event.key === 'ArrowLeft' && currentZoomCount > 0) {
+        } else if (event.key === 'ArrowRight' && currentZoomCount > 0) {
             zoomImage(-1);
             currentZoomCount--;
         }
