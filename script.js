@@ -3,6 +3,7 @@ const listImages = document.getElementById('list-images');
 const btnLoadImage = document.getElementById('btn-load-image');
 const loadJsonButton = document.getElementById('load-json-button');
 const saveJsonButton = document.getElementById('save-json-button');
+const cleanAllLabelsButton = document.getElementById('clean-all-labels-button');
 const nameImage = document.getElementById('name-image');
 const nameImageJson = document.getElementById('name-image-json');
 const imageGarmentViewer = document.getElementById('image-garment');
@@ -490,6 +491,23 @@ loadJsonButton.addEventListener('click', () => {
     });
 });
 
+// TODO: HANDLE BUTTON CLEAN ALL LABELS
+cleanAllLabelsButton.addEventListener('click', () => {
+    ResetChecked();
+    if (imageGarmentViewer.getAttribute('src') !== "") {
+        GetListLabelsChecked();
+    }
+    HandleShortedListLabels();
+    let isUpdateJson = false;
+    
+    // TODO: Show json 
+    const listCheckboxChecked = GetCheckedLabels();
+    let jsonData = JSON.stringify(listCheckboxChecked, null, 2);
+    jsonData = simplifyJSON(jsonData)
+    document.getElementById('json-data').innerHTML = syntaxHighlight(jsonData);
+    nameImageJson.innerText = nameImage.innerText;
+})
+
 function isEmpty(obj) {
     return obj === undefined || Object.keys(obj).length === 0;
 }
@@ -558,6 +576,19 @@ document.addEventListener('DOMContentLoaded', function () {
             currentZoomCount--;
         }
     });
+
+    document.addEventListener('keydown', function (event) {
+        if (imageGarmentViewer.getAttribute('src') === "") return;
+    
+        if (event.key === 'ArrowRight' && currentZoomCount < 10) {
+            zoomImage(1);
+            currentZoomCount++;
+        } else if (event.key === 'ArrowLeft' && currentZoomCount > 0) {
+            zoomImage(-1);
+            currentZoomCount--;
+        }
+    });
+
 
     function zoomImage(direction) {
         var currentWidth = imageGarmentViewer.offsetWidth;

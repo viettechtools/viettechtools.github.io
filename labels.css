@@ -68,7 +68,7 @@ li {
 
 #btn-load-image {
   padding: 5px 5px;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   border: 1px solid #ccc;
   margin: 10px 0;
@@ -78,17 +78,28 @@ li {
 #load-json-button {
   margin: 0 5px;
   padding: 5px 5px;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   border: 1px solid #ccc;
 }
 
 #save-json-button {
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 12px;
   cursor: pointer;
   border: 1px solid #ccc;
 }
+
+#clean-all-labels-button {
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-color: #7f7e7e;
+  color: #fff;
+  background-color: rgb(30, 30, 30);
+}
+
 
 #main-content {
   flex: 1;
