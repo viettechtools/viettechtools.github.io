@@ -676,17 +676,32 @@ scrollableSections.forEach(section => {
         const scrollHeight = section.scrollHeight;
         const clientHeight = section.clientHeight;
 
-        // Kiểm tra nếu có thể cuộn xuống hoặc lên trong phần này
         const isScrollableDown = delta > 0 && scrollTop + clientHeight < scrollHeight;
         const isScrollableUp = delta < 0 && scrollTop > 0;
 
         if (isScrollableDown || isScrollableUp) {
-            // Nếu còn chỗ để cuộn trong phần này, thì ngăn cuộn trang chính và chỉ cuộn phần này
             event.preventDefault();
             section.scrollTop += delta;
         } else {
-            // Nếu không còn chỗ để cuộn, vẫn ngăn cuộn trang chính
             event.preventDefault();
         }
     });
+});
+
+const zoomInButton = document.getElementById('json-zoom-in');
+const zoomOutButton = document.getElementById('json-zoom-out');
+const jsonData = document.getElementById('json-data');
+
+let currentFontSize = 16; // Kích thước phông chữ ban đầu
+
+zoomInButton.addEventListener('click', () => {
+    currentFontSize += 2; // Tăng phông chữ thêm 2px
+    jsonData.style.fontSize = `${currentFontSize}px`;
+});
+
+zoomOutButton.addEventListener('click', () => {
+    if (currentFontSize > 8) { // Giới hạn phông chữ tối thiểu
+        currentFontSize -= 2; // Giảm phông chữ đi 2px
+        jsonData.style.fontSize = `${currentFontSize}px`;
+    }
 });

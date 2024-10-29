@@ -3,9 +3,13 @@ body {
   margin: 20px;
 }
 
-h6 {
+h2, h6 {
   margin: 0;
   font-size: 12px;
+}
+
+ul {
+  margin: 0 0;
 }
 
 li {
@@ -44,8 +48,8 @@ li {
   border: 1px solid #ccc;
   padding: 10px;
 
-  max-height: 600px;
-  height: 300px;
+  max-height: 250px;
+  min-height: 250px;
   overflow-y: scroll;
 
   position: relative;
@@ -134,8 +138,8 @@ li {
   padding: 10px;
 
   width: 100%;
-  max-height: 600px;
-  min-height: 600px;
+  max-height: 350px;
+  min-height: 350px;
   overflow-y: scroll;
 }
 
@@ -171,6 +175,18 @@ li {
   right: 10px;
 }
 #zoom-out {
+  right: 50px;
+}
+
+.json-zoom-button {
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+#json-zoom-in {
+  right: 10px;
+}
+#json-zoom-out {
   right: 50px;
 }
 
