@@ -13,6 +13,7 @@ let maxWidthDefault = "100%", maxHeightDefault = "500px"
 let JUST_LOAD_JSON = false
 var currentZoomCount = 5;
 let isUpdateJson = false;
+let nameFileDefault = "localStorage.json"
 
 window.addEventListener('beforeunload', function (e) {
     if (isUpdateJson) {
@@ -433,6 +434,9 @@ const HandleChooseImage = () => {
     jsonData = simplifyJSON(jsonData)
     document.getElementById('json-data').innerHTML = syntaxHighlight(jsonData);
     nameImageJson.innerText = nameImage.innerText;
+
+    // TODO: Save autoSaveJsonToLocalStorage
+    autoSaveJsonToLocalStorage()
 }
 
 // TODO: HANDLE BUTTON_JSON(load, save)
@@ -668,6 +672,41 @@ function compareJson(obj1, obj2) {
     }
 }
 
+function autoSaveJsonToLocalStorage() {
+    if (imageGarmentViewer.getAttribute('src') !== "") {
+        GetListLabelsChecked();
+    }
+    const jsonString = JSON.stringify(labelsImages, null, 2);
+    localStorage.setItem(nameFileDefault, jsonString);
+    console.log(`File ${nameFileDefault} đã được lưu vào localStorage.`);
+}
+
+function autoDownloadJsonFromLocalStorage(jsonFileName) {
+    const jsonString = localStorage.getItem(jsonFileName);
+    
+    if (jsonString) {
+        const jsonData = JSON.parse(jsonString);
+
+        const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `label.json`; 
+        
+        link.click();
+        
+        URL.revokeObjectURL(url);
+        console.log(`File ${jsonFileName}.json đã được tải xuống tự động.`);
+    } else {
+        console.log(`File ${jsonFileName} không tồn tại trong localStorage.`);
+    }
+}
+window.addEventListener('load', () => {
+    autoDownloadJsonFromLocalStorage(nameFileDefault);
+});
+
+// TODO: SCROLL EACH SECTIONS
 const scrollableSections = document.querySelectorAll('.scrollable');
 scrollableSections.forEach(section => {
     section.addEventListener('wheel', (event) => {
@@ -688,6 +727,8 @@ scrollableSections.forEach(section => {
     });
 });
 
+
+// TODO: CHANGE FONT SIZE JSON
 const zoomInButton = document.getElementById('json-zoom-in');
 const zoomOutButton = document.getElementById('json-zoom-out');
 const jsonData = document.getElementById('json-data');
