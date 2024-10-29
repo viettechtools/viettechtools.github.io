@@ -667,3 +667,26 @@ function compareJson(obj1, obj2) {
         return obj1 === obj2;
     }
 }
+
+const scrollableSections = document.querySelectorAll('.scrollable');
+scrollableSections.forEach(section => {
+    section.addEventListener('wheel', (event) => {
+        const delta = event.deltaY;
+        const scrollTop = section.scrollTop;
+        const scrollHeight = section.scrollHeight;
+        const clientHeight = section.clientHeight;
+
+        // Kiểm tra nếu có thể cuộn xuống hoặc lên trong phần này
+        const isScrollableDown = delta > 0 && scrollTop + clientHeight < scrollHeight;
+        const isScrollableUp = delta < 0 && scrollTop > 0;
+
+        if (isScrollableDown || isScrollableUp) {
+            // Nếu còn chỗ để cuộn trong phần này, thì ngăn cuộn trang chính và chỉ cuộn phần này
+            event.preventDefault();
+            section.scrollTop += delta;
+        } else {
+            // Nếu không còn chỗ để cuộn, vẫn ngăn cuộn trang chính
+            event.preventDefault();
+        }
+    });
+});
