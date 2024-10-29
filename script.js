@@ -734,16 +734,16 @@ const zoomInButton = document.getElementById('json-zoom-in');
 const zoomOutButton = document.getElementById('json-zoom-out');
 const jsonData = document.getElementById('json-data');
 
-let currentFontSize = 16; // Kích thước phông chữ ban đầu
+let currentFontSize = 14;
 
 zoomInButton.addEventListener('click', () => {
-    currentFontSize += 2; // Tăng phông chữ thêm 2px
+    currentFontSize += 2; 
     jsonData.style.fontSize = `${currentFontSize}px`;
 });
 
 zoomOutButton.addEventListener('click', () => {
-    if (currentFontSize > 8) { // Giới hạn phông chữ tối thiểu
-        currentFontSize -= 2; // Giảm phông chữ đi 2px
+    if (currentFontSize > 8) {
+        currentFontSize -= 2;
         jsonData.style.fontSize = `${currentFontSize}px`;
     }
 });
