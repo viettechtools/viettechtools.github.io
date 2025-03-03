@@ -9431,6 +9431,38 @@ POSSIBILITY OF SUCH DAMAGE.
       return project_name;
     }
 
+    // Check existed name not_defined
+    function checkEmptyNames(arrayObjects) {
+      let result = {};
+      let hasEmpty = false;
+  
+      Object.keys(arrayObjects).forEach(key => {
+          const obj = arrayObjects[key];
+          let emptyCount = 0;
+  
+          obj.regions.forEach(region => {
+              const regionName = region.region_attributes.name;
+              if (regionName.trim() === "" || regionName.trim() === "not_defined") {
+                  emptyCount++;
+                  hasEmpty = true;
+              }
+          });
+  
+          if (emptyCount > 0) {
+              result[obj.filename] = emptyCount;
+          }
+      });
+  
+      if (hasEmpty) {
+          let message = "region_attributes.name have not undefined\n";
+          Object.keys(result).forEach(filename => {
+              message += `- ${filename}: ${result[filename]} regions\n`;
+          });
+          alert(message);
+      }
+      return hasEmpty
+    }
+
     function project_save_with_confirm() {
       var config = { 'title': 'Save Project' };
       var input = {
@@ -9448,6 +9480,11 @@ POSSIBILITY OF SUCH DAMAGE.
     function project_save_confirmed(input) {
       if (input.project_name.value !== _via_settings.project.name) {
         project_set_name(input.project_name.value);
+      }
+
+      let hasEmpty = checkEmptyNames(_via_img_metadata);
+      if (hasEmpty) {
+          return;
       }
 
       // via project
