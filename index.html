@@ -5022,6 +5022,7 @@ POSSIBILITY OF SUCH DAMAGE.
     //
     function _via_redraw_reg_canvas() {
       if (_via_current_image_loaded) {
+        console.log("CHICKKKK")
         _via_reg_ctx.clearRect(0, 0, _via_reg_canvas.width, _via_reg_canvas.height);
         if (_via_canvas_regions.length > 0) {
           if (_via_is_region_boundary_visible) {
@@ -9458,7 +9459,7 @@ POSSIBILITY OF SUCH DAMAGE.
           Object.keys(result).forEach(filename => {
               message += `- ${filename}: ${result[filename]} regions\n`;
           });
-          alert(message);
+          return !confirm(message + "\nDo you want to continue saving?");
       }
       return hasEmpty
     }
