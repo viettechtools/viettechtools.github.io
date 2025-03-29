@@ -2376,6 +2376,13 @@ POSSIBILITY OF SUCH DAMAGE.
         }, 100);
       }
 
+      const savedData = localStorage.getItem('jsonBackup');
+      if (savedData) {
+        const tmp = JSON.parse(savedData);
+        autoDownloadJson(tmp);
+        
+        localStorage.removeItem('jsonBackup');
+      }
     }
 
     function _via_init_reg_canvas_context() {
@@ -9508,8 +9515,47 @@ POSSIBILITY OF SUCH DAMAGE.
         { type: 'text/json;charset=utf-8' });
 
       save_data_to_local_file(data_blob, filename);
-
+      localStorage.removeItem('jsonBackup');
       user_input_default_cancel_handler();
+    }
+
+    // TODO: Auto save
+    setInterval(autoSave, 30000); // 30 seconds
+    function autoSave() {
+        try {
+            
+        if (JSON.stringify(_via_img_metadata) === '{}') {
+          return
+        }
+          // via project
+        var _via_project = {
+          '_via_settings': _via_settings,
+          '_via_img_metadata': _via_img_metadata,
+          '_via_attributes': _via_attributes,
+          '_via_data_save_time': new Date().toJSON(),
+          '_via_data_format_version': '2.0.10',
+          '_via_image_id_list': _via_image_id_list
+        };
+        
+        localStorage.setItem('jsonBackup', JSON.stringify(_via_project));
+        console.log('Auto-saved at ' + new Date().toLocaleTimeString());
+        } catch (e) {
+          console.log('Error saving JSON: ', e);
+        }
+    }
+
+    // TODO: Auto download when existed file
+    function autoDownloadJson(data) {
+      var filename = 'jsonBackup.json'; // Lấy tên từ input
+      var data_blob = new Blob([data], { type: 'text/json;charset=utf-8' });
+      const url = URL.createObjectURL(data_blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     function project_open_select_project_file() {
