@@ -70,7 +70,10 @@ const LABELS = {
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         },
-        "panty": ["panty"],
+        "panty": {
+            "panty": ["panty"],
+            "accessories": ["others",],
+        }
     },
     "whole-body": {
         "dress/long coat": {
