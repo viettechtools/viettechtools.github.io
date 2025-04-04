@@ -287,7 +287,55 @@ const ResetChecked = () => {
 
 // TODO: CHECKED CHECKBOX OF IMAGES
 const GetCheckedLabels = () => {
-    return labelsImages[nameImage.innerText]["labels"]
+    let tempChecked = labelsImages[nameImage.innerText]["labels"];
+
+    function filterObjectByString(obj, searchString) {
+        const result = {};
+        for (const key in obj) {
+            const value = obj[key];
+            // Nếu value là array
+            if (Array.isArray(value)) {
+                if (value.some(item => item.toLowerCase().includes(searchString.toLowerCase()))) {
+                    result[key] = value;
+                }
+            }
+            else if (typeof value === 'object' && value !== null) {
+                const filteredNested = filterObjectByString(value, searchString);
+                if (Object.keys(filteredNested).length > 0) {
+                    result[key] = filteredNested;
+                }
+            }
+        }
+        
+        return result;
+    }
+
+    function VerifyLabels(obj1, obj2) {
+        for (const key in obj1) {
+            let is_obj1_array = Array.isArray(obj1[key])
+            let is_obj2_array = Array.isArray(obj2[key])
+            if (is_obj1_array == true && is_obj2_array == false) {
+                value_obj1 = obj1[key]
+                value_obj2 = obj2[key]
+                for (idx in value_obj1) {
+                    let tmppp = filterObjectByString(value_obj2, value_obj1[idx])
+                    obj1[key] = tmppp
+                }
+
+            }
+            else if (is_obj1_array == false && is_obj2_array == true){
+                // Trường hợp nội dung cập nhật từ object thành array
+                continue
+            }
+            else if (is_obj1_array == false && is_obj2_array == false) {
+                VerifyLabels(obj1[key], obj2[key])
+            }
+        }
+    }
+
+    // TODO: VERIFY HAVE DIFF WITH LABELS
+    VerifyLabels(tempChecked, LABELS)
+    return tempChecked
 }
 const CheckedCheckboxImage = () => {
     const listCheckboxChecked = GetCheckedLabels();
