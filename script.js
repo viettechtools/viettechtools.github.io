@@ -36,6 +36,10 @@ const LABELS = {
     "texture_and_color": [
         "Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",
     ],
+    "set": {
+        "top": ["Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",],
+        "bottom": ["Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",]
+    },
     "top": {
         "top-neck": ["collar", "turtle", "round", "v-shape", "square", "plunging", "bustier", "hoodie", "offshoulder", "offshoulder-no-sleeve", "others",],
         "top-body": {
@@ -126,10 +130,6 @@ const LABELS = {
             },
             "accessories": ["bow", "ruffle", "band", "belt", "others",],
         }
-    },
-    "set": {
-        "top": ["Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",],
-        "bottom": ["Solid color", "Complex but none deal breaker", "Repeating high-frequency", "Deal breaker", "See through", "Reflective", "Others",]
     }
 };
 
