@@ -2378,8 +2378,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
       const savedData = localStorage.getItem('jsonBackup');
       if (savedData) {
-        const tmp = JSON.parse(savedData);
-        autoDownloadJson(tmp);
+        <!-- const tmp = JSON.parse(savedData); -->
+        autoDownloadJson(savedData);
         
         localStorage.removeItem('jsonBackup');
       }
@@ -9536,7 +9536,6 @@ POSSIBILITY OF SUCH DAMAGE.
           '_via_data_format_version': '2.0.10',
           '_via_image_id_list': _via_image_id_list
         };
-        
         localStorage.setItem('jsonBackup', JSON.stringify(_via_project));
         console.log('Auto-saved at ' + new Date().toLocaleTimeString());
         } catch (e) {
